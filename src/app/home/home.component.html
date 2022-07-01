@@ -1,0 +1,304 @@
+<app-header></app-header>
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex justify-cntent-center align-items-center">
+  <div id="heroCarousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel">
+
+    <!-- Slide 1 -->
+    <div class="carousel-item active">
+      <div class="carousel-container">
+        <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Coding Studio</span></h2>
+        <p class="animate__animated animate__fadeInUp">Hello everyone. Thanks for visiting for my website. It's my first
+          demo angular blog project. And one thing this website full dynamic . So i'm used laravel for backend
+          development and it's successfully work.</p>
+        <a [routerLink]="['/aboutus']" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read
+          More</a>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="carousel-item">
+      <div class="carousel-container">
+        <h2 class="animate__animated animate__fadeInDown">This My First Angular Project</h2>
+        <p class="animate__animated animate__fadeInUp">Angular is a development platform, built on TypeScript. As a
+          platform, Angular includes: A component-based framework for
+          building scalable web applications. A collection of well-integrated libraries that cover a wide variety of
+          features,
+          including routing, forms management, client-server communication, and more.</p>
+        <a [routerLink]="['/aboutus']" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read
+          More</a>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="carousel-item">
+      <div class="carousel-container">
+        <h2 class="animate__animated animate__fadeInDown">Let's Start</h2>
+        <p class="animate__animated animate__fadeInUp">Angular is a platform and framework for building single-page
+          client applications using HTML and TypeScript. Angular is
+          written in TypeScript. It implements core and optional functionality as a set of TypeScript libraries that you
+          import
+          into your applications.</p>
+        <a [routerLink]="['/aboutus']" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read
+          More</a>
+      </div>
+    </div>
+
+    <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
+    </a>
+
+    <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
+    </a>
+
+  </div>
+</section><!-- End Hero -->
+
+<main id="main">
+
+  <!-- ======= Icon Boxes Section ======= -->
+  <section id="icon-boxes" class="icon-boxes">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up">
+          <div class="icon-box">
+            <div class="icon"><img src="assets/images/php.svg" width="36" height="36" alt=""></div>
+            <h4 class="title"><a href="">About PHP</a></h4>
+            <p class="description">PHP is a server side scripting language that is embedded in HTML. It is used to
+              manage dynamic content, databases, session tracking, even build entire e-commerce sites.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon-box">
+            <div class="icon"><img src="assets/images/Laravel.png" width="33" height="33" alt=""></div>
+            <h4 class="title"><a href="">About Laravel</a></h4>
+            <p class="description">Laravel is an open-source PHP framework, which is robust and easy to understand.
+              Laravel reuses the existing components of different
+              frameworks which helps in creating a web application.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
+          <div class="icon-box">
+            <div class="icon"><img src="assets/images/codeigniter.png" width="40" height="40" alt=""></div>
+            <h4 class="title"><a href="">About CodeIgniter</a></h4>
+            <p class="description">CodeIgniter is a powerful PHP framework with a very small footprint, built for
+              developers who need a simple and elegant toolkit to create full-featured web applications.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
+          <div class="icon-box">
+            <div class="icon">
+              <img src="assets/images/angular.png" width="36" height="36" alt="">
+            </div>
+            <h4 class="title"><a href="">About Angular</a></h4>
+            <p class="description">Angular is a development platform, built on TypeScript. As a platform, Angular
+              includes: A component-based framework for building scalable web applications.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End Icon Boxes Section -->
+
+  <!-- ======= Why Us Section ======= -->
+  <section id="why-us" class="why-us">
+    <div class="container-fluid">
+
+      <div class="row">
+
+        <div class="col-lg-5 align-items-stretch position-relative video-box"
+          style='background-image: url("assets/img/why-us.jpg");' data-aos="fade-right">
+          <a href="https://www.youtube.com/channel/UCUVnAeKnOicuCmEe4nqcOBg" target="_blank"
+            class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
+        </div>
+
+        <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch" data-aos="fade-left">
+
+          <div class="content" style="padding: 20px 100px 0 100px;">
+            <h3>My youtube channel <strong>Coding Studio</strong></h3>
+            <p>
+              I maked so many diffent type of video on JavaScript, jQuery,PHP and more.
+            </p>
+          </div>
+
+          <div class="accordion-list">
+            <ul>
+              <li data-aos="fade-up" data-aos-delay="100">
+                <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span>What is
+                  <b>JavaScript</b> and why it is used ?<i class="bx bx-chevron-down icon-show"></i><i
+                    class="bx bx-chevron-up icon-close"></i></a>
+                <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
+                  <p style="text-align: justify;">
+                    JavaScript is a text-based programming language used both on the client-side and server-side that
+                    allows you to make web
+                    pages interactive. Where HTML and CSS are languages that give structure and style to web pages,
+                    JavaScript gives web
+                    pages interactive elements that engage a user.
+                  </p>
+                </div>
+              </li>
+
+              <li data-aos="fade-up" data-aos-delay="200">
+                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span>02</span>
+                  What is <b>jQuery</b> and why it is used<i class="bx bx-chevron-down icon-show"></i><i
+                    class="bx bx-chevron-up icon-close"></i></a>
+                <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
+                  <p style="text-align: justify;">
+                    jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document
+                    traversal and
+                    manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works
+                    across a multitude of
+                    browsers.
+                  </p>
+                </div>
+              </li>
+
+              <li data-aos="fade-up" data-aos-delay="300">
+                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>03</span> What
+                  is<b> PHP</b> and why it is used?<i class="bx bx-chevron-down icon-show"></i><i
+                    class="bx bx-chevron-up icon-close"></i></a>
+                <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
+                  <p style="text-align: justify;">PHP is a server side scripting language that is embedded in HTML. It
+                    is used to manage dynamic content, databases,
+                    session tracking, even build entire e-commerce sites. It is integrated with a number of popular
+                    databases, including
+                    MySQL, PostgreSQL, Oracle, Sybase, Informix, and Microsoft SQL Server.</p>
+                </div>
+              </li>
+              <li data-aos="fade-up" data-aos-delay="300">
+                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-4" class="collapsed"><span>04</span>What
+                  is <b>CodeIgniter</b> and why it is used?<i class="bx bx-chevron-down icon-show"></i><i
+                    class="bx bx-chevron-up icon-close"></i></a>
+                <div id="accordion-list-4" class="collapse" data-bs-parent=".accordion-list">
+                  <p style="text-align: justify;">CodeIgniter is a PHP MVC framework used for developing web
+                    applications rapidly. CodeIgniter provides out of the box
+                    libraries for connecting to the database and performing various operations like sending emails,
+                    uploading files,
+                    managing sessions, etc.</p>
+                </div>
+              </li>
+              <li data-aos="fade-up" data-aos-delay="300">
+                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-5" class="collapsed"><span>05</span>What
+                  is<b> Laravel</b> and why it is used?<i class="bx bx-chevron-down icon-show"></i><i
+                    class="bx bx-chevron-up icon-close"></i></a>
+                <div id="accordion-list-5" class="collapse" data-bs-parent=".accordion-list">
+                  <p style="text-align: justify;">Laravel is a web application framework with expressive, elegant
+                    syntax. Laravel attempts to take the pain out of
+                    development by easing common tasks used in the majority of web projects, such as authentication,
+                    routing, sessions, and
+                    caching.</p>
+                </div>
+              </li>
+              <li data-aos="fade-up" data-aos-delay="300">
+                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-6" class="collapsed"><span>06</span>What
+                  is<b> Angular</b> and why it is used?<i class="bx bx-chevron-down icon-show"></i><i
+                    class="bx bx-chevron-up icon-close"></i></a>
+                <div id="accordion-list-6" class="collapse" data-bs-parent=".accordion-list">
+                  <p style="text-align: justify;">Angular is an open-source, JavaScript framework written in TypeScript.
+                    Google maintains it, and its primary purpose is
+                    to develop single-page applications. As a framework, Angular has clear advantages while also
+                    providing a standard
+                    structure for developers to work with.</p>
+                </div>
+              </li>
+
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End Why Us Section -->
+
+  <!-- ======= Services Section ======= -->
+  <section id="services" class="services">
+    <div class="col-md-12" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>My Video Gallery</h2>
+        <p>Hello Friends. This is my youtube videos</p>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon-box" style="padding: 10px 10px;">
+            <div style="margin-left: 0px;">
+              <iframe width="424" height="238" src="https://www.youtube.com/embed/T0Sp8q9w46A"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+            <h4 style="margin-left: 0px;"><a target="_blank" href="https://www.youtube.com/watch?v=T0Sp8q9w46A">How to
+                delete multiple
+                rows without page reload ?</a></h4>
+          </div>
+        </div>
+        <div class="col-md-4 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="200">
+          <div class="icon-box" style="padding: 10px 10px;">
+            <div style="margin-left: 0px;">
+              <iframe width="450" height="238" src="https://www.youtube.com/embed/GklFO3PQN5o"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+            <h4 style="margin-left: 0px;"><a target="_blank"
+                href="https://www.youtube.com/watch?v=GklFO3PQN5o&t=116s">How to Insert
+                Multiple Rows Data using jQuery and PHP ?</a></h4>
+          </div>
+        </div>
+        <div class="col-md-4 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="300">
+          <div class="icon-box" style="padding: 10px 10px;">
+            <div style="margin-left: 0px;"><iframe width="424" height="238"
+                src="https://www.youtube.com/embed/vzBuT_0lHSY" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe></div>
+            <h4 style="margin-left: 0px;"><a target="_blank" href="https://www.youtube.com/watch?v=vzBuT_0lHSY">How to
+                edit multiple
+                rows using PHP ?</a></h4>
+          </div>
+        </div>
+        <div class="col-md-4 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="400">
+          <div class="icon-box" style="padding: 10px 10px;">
+            <div style="margin-left: 0px;"><iframe width="424" height="238"
+                src="https://www.youtube.com/embed/CI0Y3Limxek" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe></div>
+            <h4 style="margin-left: 0px;"><a target="_blank" href="#">How to delete multiple rows using PHP ?</a></h4>
+          </div>
+        </div>
+        <div class="col-md-4 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="500">
+          <div class="icon-box" style="padding: 10px 10px;">
+            <div style="margin-left: 0px;"><iframe width="424" height="238"
+                src="https://www.youtube.com/embed/nAF-WHgjJ5g" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe></div>
+            <h4 style="margin-left: 0px;"><a target="_blank" href="https://www.youtube.com/watch?v=nAF-WHgjJ5g&t=1s">How
+                to render & view PDF to CANVAS in a web page using html and javascript ?</a>
+            </h4>
+          </div>
+        </div>
+        <div class="col-md-4 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="600">
+          <div class="icon-box" style="padding: 10px 10px;">
+            <div style="margin-left: 0px;"><iframe width="424" height="238"
+                src="https://www.youtube.com/embed/kA4OWq6FEoo" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe></div>
+            <h4 style="margin-left: 0px;"><a target="_blank" href="https://www.youtube.com/watch?v=kA4OWq6FEoo&t=1s">How
+                to upload file using AJAX and PHP ?</a></h4>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Services Section -->
+
+
+</main><!-- End #main -->
+<app-footer></app-footer>

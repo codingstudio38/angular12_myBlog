@@ -1,0 +1,25 @@
+.skills{
+    background-color: #05579e;  padding: 6px; color: white;
+}
+.skillsdiv{
+    background-color: #c5e4fa; padding: 5px; text-align: justify; margin-top: -8px; margin-bottom: 15px;
+}
+.skillsdiv ul{margin-left: -15px;}
+.progress{
+    height: 0.6rem;
+    border-radius: 0px;
+    background-color:white;
+}
+.progress div{
+ background-color:   #2583c4!important;
+}
+.center {
+  background: #db8ff8;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+}

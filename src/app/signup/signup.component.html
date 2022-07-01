@@ -1,0 +1,152 @@
+<section class="h-100 gradient-form" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+                <div class="card rounded-3 text-black">
+                    <div class="row g-0">
+                        <div class="col-lg-6">
+                            <a type="button" [routerLink]="['']" class="btn btn-success"
+                                style="margin-left: 10px; margin-top: 10px;"><i class="fa fa-home" aria-hidden="true"
+                                    style="font-size: large; "></i></a>
+                            <div class="card-body p-md-2 mx-md-4">
+
+                                <div class="text-center">
+                                    <img src="assets/images/entro-icon1.png" style="width: 135px; height: 130px;"
+                                        alt="logo">
+                                    <h4 class="mt-1 mb-3 pb-1">Coding Studio</h4>
+                                </div>
+                                <div [ngSwitch]="apistatusCode">
+                                    <div *ngSwitchCase="'200'">
+                                        <div class="alert alert-success" *ngIf="registerPoint"
+                                            style="text-align: center;" role="alert">
+                                            {{register_message}}</div>
+                                    </div>
+                                    <div *ngSwitchCase="'400'">
+                                        <div class="alert alert-danger" *ngIf="registerPoint"
+                                            style="text-align: center;" role="alert">
+                                            {{register_message}}</div>
+                                    </div>
+                                    <div *ngSwitchDefault>
+
+                                    </div>
+                                </div>
+
+                                <form [formGroup]="registerForm" (ngSubmit)="register()">
+                                    <div class="form-outline mb-2">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                            <input name="name" type="text" value="" class="input form-control" id="name"
+                                                placeholder="Full Name" required="true" aria-label="name"
+                                                aria-describedby="basic-addon1" formControlName="name" />
+
+                                        </div>
+                                        <span class="lab-invalid" *ngIf="name && name.invalid && name.touched">Name
+                                            field is not
+                                            valid</span>
+                                    </div>
+                                    <div class="form-outline mb-2">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                            <input name="emailid" type="email" value="" class="input form-control"
+                                                id="emailid" placeholder="Email Id" required="true" aria-label="emailid"
+                                                aria-describedby="basic-addon1" formControlName="emailid" />
+                                        </div>
+                                        <span class="lab-invalid"
+                                            *ngIf="emailid && emailid.invalid && emailid.touched">Email Id field is
+                                            not valid</span>
+                                    </div>
+                                    <div class="form-outline mb-2">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                            <input name="phoneno" type="text" value="" class="input form-control"
+                                                id="phoneno" placeholder="Phone No" required="true" aria-label="phoneno"
+                                                aria-describedby="basic-addon1" formControlName="phoneno" />
+                                        </div>
+                                        <span class="lab-invalid"
+                                            *ngIf="phoneno && phoneno.invalid && phoneno.touched">Phone no field is
+                                            not valid</span>
+                                    </div>
+                                    <div class="form-outline mb-2">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <i class="fa fa-lock" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                            <input name="password" type="password" value="" class="input form-control"
+                                                id="password" placeholder="Password" required="true"
+                                                aria-label="password" aria-describedby="basic-addon1"
+                                                formControlName="password" />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="checkinput" onclick="show_hide()">
+                                                    <i class="fa fa-eye" aria-hidden="true" id="show_eye"></i>
+                                                    <i class="fa fa-eye-slash" aria-hidden="true" id="hide_eye"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <span class="lab-invalid"
+                                            *ngIf="password && password.invalid && password.touched">Password field is
+                                            not
+                                            valid</span>
+                                    </div>
+                                    <div class="form-outline mb-2">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" formControlName="profilePic"
+                                                id="profilePic" lang="pl-Pl" (change)="uploadFile($event)">
+                                            <div *ngIf="filename==''; then hidename else viewname">
+                                            </div>
+                                            <ng-template #hidename>
+                                                <label class="custom-file-label" for="profilePic">Profile
+                                                    Picture</label>
+                                            </ng-template>
+                                            <ng-template #viewname>
+                                                <label class="custom-file-label" for="profilePic">{{filename}}</label>
+                                            </ng-template>
+                                            <span class="lab-invalid"
+                                                *ngIf="profilePic && profilePic.invalid && profilePic.touched">This
+                                                field is
+                                                not valid</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-center pt-1 mb-3 pb-1">
+                                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                                            type="submit" [disabled]="registerForm.invalid">Sign Up</button>
+                                    </div>
+
+                                    <div class="d-flex align-items-center justify-content-center pb-4">
+                                        <a [routerLink]="['/signin']" style="width: -webkit-fill-available;"
+                                            type="button" class="btn btn-outline-danger">Already have an account</a>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                                <h4 class="mb-4">We are more than just a company</h4>
+                                <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

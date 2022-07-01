@@ -1,0 +1,13 @@
+.mc {
+  background: #bcf6b8;
+  border: 2px solid #69d101;
+  border-radius: 5px;
+}
+
+.mc h5 {
+  text-align: center;
+}
+
+.mc button {
+  width: 100%;
+}

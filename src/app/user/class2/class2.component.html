@@ -1,0 +1,209 @@
+<div class="container mb-5">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8">
+
+
+
+
+                <h1>Multiples row and multiples files upload</h1>
+
+                <form [formGroup]="multiple_data" (ngSubmit)="uploadMultiple()">
+                    <table>
+                        <tr>
+                            <td>Customer Name</td>
+                            <td>
+                                <input type="text" placeholder="Customer Name" name="cname" id="cname"
+                                    formControlName="cname">
+                                <span class="text-danger lab-invalid"
+                                    *ngIf="cname && cname.invalid && cname.touched">Name is
+                                    required*</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Customer Email</td>
+                            <td>
+                                <input type="email" placeholder="Customer Email" name="cemail" id="cemail"
+                                    formControlName="cemail">
+                                <span class="text-danger lab-invalid"
+                                    *ngIf="cemail && cemail.invalid && cemail.touched">Email is
+                                    required*</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Customer Phone</td>
+                            <td>
+                                <input type="number" placeholder="Customer Name" name="cphone" id="cphone"
+                                    formControlName="cphone">
+                                <span class="text-danger lab-invalid"
+                                    *ngIf="cphone && cphone.invalid && cphone.touched">Phone is
+                                    required*</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button style="width: 100%;" class="btn btn-primary btn-sm" type="button"
+                                    (click)="addProduct()">Add
+                                    Product</button>
+                            </td>
+                        </tr>
+                    </table>
+                    <table formArrayName="allproduct">
+                        <tr>
+                            <td>Product Name</td>
+                            <td>Quantity</td>
+                            <td>Price</td>
+                            <td>Product File</td>
+                            <td>Remove</td>
+                        </tr>
+                        <tr *ngFor="let quantity of product().controls; let i=index" [formGroupName]="i">
+                            <td>
+                                <input type="text" formControlName="name" id="name_{{i}}" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" formControlName="qty" id="qty_{{i}}" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" formControlName="price" id="price_{{i}}" class="form-control">
+                            </td>
+                            <td>
+                                <input type="file" formControlName="productfile" id="productfile_{{i}}"
+                                    accept="image/png, image/gif, image/jpeg" (change)="setfile($event,i)"
+                                    class="form-control">
+                            </td>
+                            <td>
+                                <button (click)="removeProduct(i)" id="rmv_{{i}}"
+                                    class="btn btn-danger btn-sm">Remove</button>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <button type="submit" [disabled]="multiple_data.invalid" class="btn btn-success">Submit</button>
+                </form>
+
+                <br />
+
+                <h1>Edit and view multiples row and multiples files upload</h1>
+                <div class="col-md-6">
+                    <form #multi_usersearch="ngForm" (ngSubmit)="multi_searchuser(multi_usersearch)">
+                        <div class="form-group">
+                            <label for="multi_userid">Select User:</label>
+                            <select class="form-select" aria-label="Default select example" id="multi_userid"
+                                name="multi_userid" ngModel>
+                                <option value="">Select User</option>
+                                <option value="{{items.id}}" *ngFor="let items of allmultidata">
+                                    {{items.cname}}({{items.cemail}})
+                                </option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">GET</button>
+                        </div>
+                    </form>
+                </div>
+                <h1>view and Edit</h1>
+                <div *ngIf="multi_search_status=='200'; then viewmultiform">
+                </div>
+                <ng-template #viewmultiform>
+                    <form [formGroup]="view_multiple_data" (ngSubmit)="updateMultiple()">
+                        <table>
+                            <tr>
+                                <td>Customer Name</td>
+                                <td>
+                                    <input type="text" placeholder="Customer Name" name="customer_name"
+                                        id="customer_name" formControlName="customer_name">
+                                    <span class="text-danger lab-invalid"
+                                        *ngIf="customer_name && customer_name.invalid && customer_name.touched">Name is
+                                        required*</span>
+                                    <input type="hidden" placeholder="Customer Name" name="customer_id" id="customer_id"
+                                        formControlName="customer_id">
+                                    <span class="text-danger lab-invalid"
+                                        *ngIf="customer_id && customer_id.invalid && customer_id.touched">Id is
+                                        required*</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Customer Email</td>
+                                <td>
+                                    <input type="email" placeholder="Customer Email" name="customer_email"
+                                        id="customer_email" formControlName="customer_email">
+                                    <span class="text-danger lab-invalid"
+                                        *ngIf="customer_email && customer_email.invalid && customer_email.touched">Email
+                                        is
+                                        required*</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Customer Phone</td>
+                                <td>
+                                    <input type="number" placeholder="Customer Name" name="customer_phone"
+                                        id="customer_phone" formControlName="customer_phone">
+                                    <span class="text-danger lab-invalid"
+                                        *ngIf="customer_phone && customer_phone.invalid && customer_phone.touched">Phone
+                                        is
+                                        required*</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <button style="width: 100%;" class="btn btn-primary btn-sm" type="button"
+                                        (click)="view_addProduct()">Add
+                                        Product</button>
+                                </td>
+                            </tr>
+                        </table>
+                        <table formArrayName="view_allproduct">
+                            <tr>
+                                <td>Product Name</td>
+                                <td>Quantity</td>
+                                <td>Price</td>
+                                <td>Product File</td>
+                                <td>Photo</td>
+                                <td>Remove</td>
+                            </tr>
+                            <tr *ngFor="let quantity of view_product().controls; let i=index" [formGroupName]="i">
+                                <td>
+                                    <input type="text" formControlName="new_name" id="new_name{{i}}"
+                                        class="form-control">
+                                    <input type="hidden" formControlName="up_id" id="up_id{{i}}" class="form-control">
+                                    <input type="hidden" formControlName="old_photo" id="old_photo{{i}}"
+                                        class="form-control">
+                                </td>
+                                <td>
+                                    <input type="text" formControlName="new_qty" id="new_qty{{i}}" class="form-control">
+                                </td>
+                                <td>
+                                    <input type="text" formControlName="new_price" id="new_price{{i}}"
+                                        class="form-control">
+                                </td>
+                                <td>
+                                    <input type="file" formControlName="new_file" id="new_file{{i}}"
+                                        accept="image/png, image/gif, image/jpeg" (change)="newfileset($event,i)"
+                                        class="form-control">
+                                </td>
+                                <td id="viewphoto{{i}}" #viewphoto{{i}}>
+
+                                </td>
+                                <td>
+                                    <button (click)="view_removeProduct(i)" id="rmv_{{i}}"
+                                        class="btn btn-danger btn-sm">Remove</button>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <button type="submit" [disabled]="view_multiple_data.invalid"
+                            class="btn btn-success">Update</button>
+                    </form>
+                </ng-template>
+
+
+
+            </div>
+            <div class="col-md-4">
+                <app-user-details></app-user-details>
+
+            </div>
+        </div>
+    </div>
+</div>

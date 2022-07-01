@@ -1,13 +1,77 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <title>MyBlog</title>
+  <title id="pname"></title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="assets/images/entro-icon1.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
 </head>
+
 <body>
   <app-root></app-root>
+  <script>
+    setInterval(function () {
+      getPage();
+    }, 100);
+    getPage();
+    function show_hide() {
+      var x = document.getElementById("password");
+      var show_eye = document.getElementById("show_eye");
+      var hide_eye = document.getElementById("hide_eye");
+      hide_eye.classList.remove("d-none");
+      if (x.type === "password") {
+        x.type = "text";
+        show_eye.style.display = "none";
+        hide_eye.style.display = "block";
+      } else {
+        x.type = "password";
+        show_eye.style.display = "block";
+        hide_eye.style.display = "none";
+      }
+    }
+    function getPage() {
+      let name = window.location.pathname;
+      if (name == "/") {
+        pname = "Home";
+      } else if (name == "/aboutus") {
+        pname = "About Me";
+      } else if (name == "/contactus") {
+        pname = "Contact";
+      } else if (name == "/gallery") {
+        pname = "Gallery";
+      } else if (name == "/signin") {
+        pname = "Sign In";
+      } else if (name == "/signup") {
+        pname = "Sign Up";
+      } else if (name == "/user/home") {
+        pname = "User Home";
+      } else {
+        pname = "User Panel";
+      }
+      $("#pname").html(`Coding Studio - ${pname}`);
+    }
+  </script>
+  <!-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
+
 </html>

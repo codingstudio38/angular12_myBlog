@@ -1,0 +1,142 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-light">
+    <a class="navbar-brand" [routerLink]="['']"><i class="fa fa-home" aria-hidden="true"
+            style="font-size: x-large;"></i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <div *ngIf="headerCheck=='/'; then homeActive else homeDeactivate"></div>
+            <ng-template #homeActive>
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['']">Home</a>
+                </li>
+            </ng-template>
+            <ng-template #homeDeactivate>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['']">Home</a>
+                </li>
+            </ng-template>
+            <div *ngIf="headerCheck=='/aboutus'; then aboutActive else aboutDeactivate"></div>
+            <ng-template #aboutActive>
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/aboutus']">About Me</a>
+                </li>
+            </ng-template>
+            <ng-template #aboutDeactivate>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/aboutus']">About Me</a>
+                </li>
+            </ng-template>
+            <div *ngIf="headerCheck=='/gallery'; then galleryActive else galleryDeactivate"></div>
+            <ng-template #galleryActive>
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/gallery']">Gallery</a>
+                </li>
+            </ng-template>
+            <ng-template #galleryDeactivate>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/gallery']">Gallery</a>
+                </li>
+            </ng-template>
+            <div *ngIf="headerCheck=='/contactus'; then contactActive else contactDeactivate"></div>
+            <ng-template #contactActive>
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/contactus']">Contant</a>
+                </li>
+            </ng-template>
+            <ng-template #contactDeactivate>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/contactus']">Contant</a>
+                </li>
+            </ng-template>
+            <li class="nav-item dropdown" *ngIf="dashboardmenu">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Menu
+                </a>
+                <div class="dropdown-menu cczd" style="background: #319dca;" aria-labelledby="navbarDropdown">
+                    <div class="inulli">
+                        <a class="dropdown-item" [routerLink]="['/user/home']">Dashboard <i class="fa fa-tachometer"
+                                aria-hidden="true"></i> </a>
+                    </div>
+                    <div class="inulli">
+                        <a class="dropdown-item" (click)="logout()" href="javascript:void(0)">Logout <i
+                                class="fa fa-sign-in" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </li> 
+            <div [ngSwitch]="headerCheck" *ngIf="loginmenu">
+                <div style="color: rgb(252, 6, 6);" *ngSwitchCase="'/signin'">
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Login
+                        </a>
+                        <div class="dropdown-menu cczd" style="background: #319dca;" aria-labelledby="navbarDropdown">
+                            <div class="inulli">
+                                <a class="dropdown-item" [routerLink]="['/signin']">Sing In<i class="fa fa-sign-in"
+                                        aria-hidden="true"></i></a>
+                            </div>
+                            <div class="inulli">
+                                <a class="dropdown-item" [routerLink]="['/signup']">Sing Up<i class="fa fa-user-plus"
+                                        aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <div style="color: rgb(14, 230, 14);" *ngSwitchCase="'/signup'">
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Login
+                        </a>
+                        <div class="dropdown-menu cczd" style="background: #319dca;" aria-labelledby="navbarDropdown">
+                            <div class="inulli">
+                                <a class="dropdown-item" [routerLink]="['/signin']">Sing In<i class="fa fa-sign-in"
+                                        aria-hidden="true"></i></a>
+                            </div>
+                            <div class="inulli">
+                                <a class="dropdown-item" [routerLink]="['/signup']">Sing Up<i class="fa fa-user-plus"
+                                        aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <div *ngSwitchDefault>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Login
+                        </a>
+                        <div class="dropdown-menu cczd" style="background: #319dca;" aria-labelledby="navbarDropdown">
+                            <div class="inulli">
+                                <a class="dropdown-item" [routerLink]="['/signin']">Sing In<i class="fa fa-sign-in"
+                                        aria-hidden="true"></i></a>
+                            </div>
+                            <div class="inulli">
+                                <a class="dropdown-item" [routerLink]="['/signup']">Sing Up<i class="fa fa-user-plus"
+                                        aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+            </div>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+
+            <div class="col-lg-12">
+                <table width="100%" border="0">
+                    <tr>
+                        <td><input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                                style="border-radius: 0px;"></td>
+                        <td><button class="btn btn-outline-success my-sm-0 searchbtn"
+                                style="border-radius: 0px; width: -webkit-fill-available;" type="button">Search</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</nav>

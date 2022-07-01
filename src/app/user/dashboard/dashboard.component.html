@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8">
+                <h3 style="text-align: center;background: #c4eafc;padding: 5px;">Add Videos</h3>
+                <button type="button" (click)="addnew()" class="btn btn-primary btn-block mb-2">Click to add
+                    new</button>
+                <form #addressForm="ngForm" (ngSubmit)="formValue()">
+                    <div *ngFor="let list of formlist; let i=index;">
+                        <button type="button" class="btn btn-danger mb-2" style="float: right;"
+                            (click)="removeThis(i)">Remove</button>
+                        <br><br>
+                        <div class="form-group row">
+                            <label for="title" class="col-sm-2 col-form-label">Video Title</label>
+                            <div class="col-sm-10">
+                                <input type="text" [(ngModel)]="list.title" class="form-control"
+                                    name="title_{{list.id}}" id="title_{{list.id}}" placeholder="Title">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="link" class="col-sm-2 col-form-label">Video Link</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" [(ngModel)]="list.link" name="link_{{list.id}}"
+                                    id="link_{{list.id}}" placeholder="www.youtubevideolink.vom">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date" class="col-sm-2 col-form-label">Date</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" [(ngModel)]="list.date" name="date_{{list.id}}"
+                                    id="date_{{list.id}}" placeholder="www.youtubevideolink.vom">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block">Add Video</button>
+                </form>
+                <br>
+                <button class="btn btn-info" (click)="checkuser()">Check login user</button><br>
+                {{ loginuser | json }}
+
+
+
+
+
+            </div>
+            <div class="col-md-4">
+                <app-user-details></app-user-details>
+            </div>
+        </div>
+    </div>
+</div>

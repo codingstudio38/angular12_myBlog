@@ -1,0 +1,8 @@
+
+
+            "styles": [
+              "bootstrap/dist/css/bootstrap.min.css"
+            ],
+            "scripts": [
+              "bootstrap/dist/js/bootstrap.min.js"
+            ]

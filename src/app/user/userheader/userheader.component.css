@@ -1,0 +1,79 @@
+.navbar-light {
+  background-color: #05579e;
+  padding: 5px;
+}
+
+.nav-item a {
+  color: white;
+}
+
+.nav-item:hover {
+  background-color: aliceblue;
+}
+
+.nav-item:hover>a {
+  color: black;
+}
+
+.nav-item {
+  padding: 10px;
+}
+
+.nav-item a {
+  font-size: initial;
+  font-family: -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol";
+}
+
+.active {
+  background-color: aliceblue;
+}
+
+.active a {
+  color: black;
+}
+
+.inli-active {
+  background-color: #42c0f4;
+}
+
+.inulli {
+  text-align: center;
+}
+
+.inulli:hover>a {
+  background-color: #42c0f4;
+  color: rgb(255, 255, 255);
+}
+
+.inulli>a {
+  padding: 10px;
+  color: black;
+}
+
+.cczd {
+  padding: 0px;
+  border: 0px;
+  border-radius: 0px;
+}
+
+.searchbtn {
+  background-color: #178831;
+  border-color: #178831;
+  color: rgb(228, 228, 228);
+  width: -webkit-fill-available;
+}
+
+.searchbtn:hover {
+  background-color: #16cf41;
+  border-color: #16cf41;
+  color: white;
+}
