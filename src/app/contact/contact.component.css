@@ -1,0 +1,25 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+button{
+  cursor: pointer;
+}
+button[disabled]{
+  cursor: no-drop;
+}
+.contact .php-email-form button[type=submit] {
+  background: #032854; 
+  color: #00a2ff;
+}
+.contact .php-email-form button[type=submit]:hover {
+  background: #0b95f1; 
+  color: #ffffff;
+}

@@ -4,18 +4,18 @@
             <div class="col-md-8">
 
 
-                <h2>Add user</h2>
+                <h2>Add Gallery</h2>
                 <form [formGroup]="form2" (ngSubmit)="userupload()">
                     <div class="form-group">
-                        <label for="email1">Email address:</label>
-                        <input type="email" class="form-control" id="email1" name="email1" formControlName="email1">
-                        <span class="text-danger lab-invalid" *ngIf="email1 && email1.invalid && email1.touched">Email
+                        <label for="email1">Titel:</label>
+                        <input type="text" class="form-control" id="email1" name="email1" formControlName="email1">
+                        <span class="text-danger lab-invalid" *ngIf="email1 && email1.invalid && email1.touched">Title
                             Id field is
                             not valid</span>
 
                     </div>
                     <div class="form-group">
-                        <label for="pwd1">Password:</label>
+                        <label for="pwd1">Type:</label>
                         <table width="100%">
                             <tr>
                                 <td width="90%"><input [type]=passwordType class="form-control" id="pwd1" name="pwd1"
@@ -27,13 +27,14 @@
                                 </td>
                             </tr>
                         </table>
-                        <span class="text-danger lab-invalid" *ngIf="pwd1 && pwd1.invalid && pwd1.touched">Password
+
+                        <span class="text-danger lab-invalid" *ngIf="pwd1 && pwd1.invalid && pwd1.touched">Type
                             field is
                             not valid</span>
                     </div>
 
                     <div class="form-group">
-                        <label for="profilePic">Profile Picture:</label>
+                        <label for="profilePic">Picture:</label>
                         <input type="file" class="form-control" formControlName="profilePic" name="profilePic"
                             id="profilePic" lang="pl-Pl" (change)="uploadFile($event)">
                         <br>
@@ -51,58 +52,11 @@
                 </form>
 
                 <br>
-                <div *ngIf="datatime; then viewloader else viewdatatbl">
-                </div>
-                <ng-template #viewloader>
-                    <div class="text-center">
-                        <img src="assets/images/loader.gif" style="width: 45px; height:45px;" alt="">
-                    </div>
-                </ng-template>
-                <ng-template #viewdatatbl>
-                </ng-template>
-                <table class="table table-striped table-dark" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Sl No.</th>
-                            <th>ID</th>
-                            <th>Emails Id</th>
-                            <th>Photo</th>
-                            <th>Created Date</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody style="border-top:0px;">
-                        <tr
-                            *ngFor="let item of tbldata | paginate: { itemsPerPage: 5, currentPage: page, totalItems: total }; let i=index;">
-                            <td>{{item.slno}}</td>
-                            <td>{{ item.id }}</td>
-                            <td>{{ item.email }}</td>
-                            <td><img src="http://127.0.0.1:8000/newdemo/uploadFiles/{{ item.photo }}"
-                                    style="width: 45px; height:45px"></td>
-                            <td>{{ item.currentdate | date:'fullDate' }}</td>
-                            <td>
-                                <button type="button" class="btnnew btn btn-primary" (click)="openPopup(item)">
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                </button>
-                                <button type="button" class="btnnew btn btn-danger" (click)="deleteis(item.id)">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </button>
-                                <button type="button" class="btnnew btn btn-warning" (click)="useredit(item)">
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
-
-
-                <br>
 
                 <div *ngIf="search_status=='200'; then viewtable">
                 </div>
                 <ng-template #viewtable>
-                    <h2>Update user</h2>
+                    <h2>Edit Gallery</h2>
                     <form [formGroup]="updateform" (ngSubmit)="userupdate()">
                         <table class="table" border="1">
                             <tr>
@@ -119,13 +73,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td align="center">User Id</td>
+                                <td align="center">Id</td>
                                 <td align="center">
                                     <input type="hidden" id="oldfile" name="oldfile" formControlName="oldfile">
                                     <input type="text" class="form-control" readonly id="updateid" name="updateid"
                                         formControlName="updateid">
                                     <span class="text-danger lab-invalid"
-                                        *ngIf="updateid && updateid.invalid && updateid.touched">Email
+                                        *ngIf="updateid && updateid.invalid && updateid.touched">
                                         Id
                                         field
                                         is
@@ -133,18 +87,32 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td align="center">Email Id</td>
+                                <td align="center">Title</td>
                                 <td align="center">
-                                    <input type="email" class="form-control" id="emailnew" name="emailnew"
+                                    <input type="text" class="form-control" id="emailnew" name="emailnew"
                                         formControlName="emailnew">
                                     <span class="text-danger lab-invalid"
-                                        *ngIf="emailnew && emailnew.invalid && emailnew.touched">Email
+                                        *ngIf="emailnew && emailnew.invalid && emailnew.touched">Title
                                         Id
                                         field
                                         is
                                         not valid</span>
                                 </td>
                             </tr>
+                            <tr>
+                                <td align="center">Type</td>
+                                <td align="center">
+                                    <input type="text" class="form-control" id="updatetype" name="updatetype"
+                                        formControlName="updatetype">
+                                    <span class="text-danger lab-invalid"
+                                        *ngIf="updatetype && updatetype.invalid && updatetype.touched">
+                                        Type
+                                        field
+                                        is 
+                                        not valid</span>
+                                </td>
+                            </tr>
+
                             <tr>
                                 <td align="center">Created Date</td>
                                 <td align="center">{{currentdate}}</td>
@@ -161,13 +129,14 @@
                         </table>
                     </form>
                 </ng-template>
+
             </div>
             <div class="col-md-4">
                 <app-user-details></app-user-details>
                 <br>
                 <form #usersearch="ngForm" class="form-control" (ngSubmit)="searchuser(usersearch)">
                     <label for="">
-                        <h3>Search user</h3>
+                        <h3>Search Galley</h3>
                     </label>
                     <div class="form-group">
                         <select class="form-control" aria-label="Default select example" id="userid" name="userid"
@@ -183,6 +152,71 @@
                 </form>
             </div>
         </div>
+
+
+
+        <br>
+        <div *ngIf="datatime; then viewloader else viewdatatbl">
+        </div>
+        <ng-template #viewloader>
+            <div class="text-center">
+                <img src="assets/images/loader.gif" style="width: 45px; height:45px;" alt="">
+            </div>
+        </ng-template>
+        <ng-template #viewdatatbl>
+        </ng-template>
+        <table class="table table-striped table-dark" width="100%">
+            <thead>
+                <tr>
+                    <th>Sl No.</th>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Photo</th>
+                    <th>Created Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody style="border-top:0px;"> 
+                <tr
+                    *ngFor="let item of tbldata | paginate: { itemsPerPage: 5, currentPage: page, totalItems: total }; let i=index;">
+                    <td>{{item.slno}}</td>
+                    <td>{{ item.id }}</td>
+                    <td>
+                        <textarea style="width: 150px; overflow-x:scroll;">
+                                {{ item.email }}
+                            </textarea>
+                    </td>
+                    <td>
+                        <textarea style="width: 150px; overflow-x:scroll;">
+                                {{ item.password }}
+                            </textarea>
+                    </td>
+                    <td><img src="http://127.0.0.1:8000/newdemo/uploadFiles/{{ item.photo }}"
+                            style="width: 45px; height:45px"></td>
+                    <td>{{ item.currentdate | date:'fullDate' }}</td>
+                    <td>
+                        <button type="button" class="btnnew btn btn-primary" (click)="openPopup(item)">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="btnnew btn btn-danger" (click)="deleteis(item.id)">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="btnnew btn btn-warning" (click)="useredit(item)">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot style="background-color: white;">
+                <tr>
+                    <td colspan="7" align="center">
+                        <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
     </div>
 </div>
 

@@ -1,0 +1,6 @@
+.modal{
+    background: #22222259;
+    z-index: 1072; 
+    opacity: 1; 
+    transition: opacity .15s linear;
+}

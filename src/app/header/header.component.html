@@ -46,12 +46,12 @@
                         </a>
                         <div class="dropdown-menu cczd" style="background: #319dca;" aria-labelledby="navbarDropdown">
                             <div class="inulli">
-                                <a class="dropdown-item" [routerLink]="['/signin']">Sing In<i class="fa fa-sign-in"
-                                        aria-hidden="true"></i></a>
+                                <a class="dropdown-item" [routerLink]="['/signin']">Admin Sing In<i
+                                        class="fa fa-sign-in" aria-hidden="true"></i></a>
                             </div>
                             <div class="inulli">
-                                <a class="dropdown-item" [routerLink]="['/signup']">Sing Up<i class="fa fa-user-plus"
-                                        aria-hidden="true"></i></a>
+                                <a class="dropdown-item" [routerLink]="['/signup']">Admin Sing Up<i
+                                        class="fa fa-user-plus" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </li>
@@ -64,12 +64,12 @@
                         </a>
                         <div class="dropdown-menu cczd" style="background: #319dca;" aria-labelledby="navbarDropdown">
                             <div class="inulli">
-                                <a class="dropdown-item" [routerLink]="['/signin']">Sing In<i class="fa fa-sign-in"
-                                        aria-hidden="true"></i></a>
+                                <a class="dropdown-item" [routerLink]="['/signin']">Admin Sing In<i
+                                        class="fa fa-sign-in" aria-hidden="true"></i></a>
                             </div>
                             <div class="inulli">
-                                <a class="dropdown-item" [routerLink]="['/signup']">Sing Up<i class="fa fa-user-plus"
-                                        aria-hidden="true"></i></a>
+                                <a class="dropdown-item" [routerLink]="['/signup']">Admin Sing Up<i
+                                        class="fa fa-user-plus" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </li>
@@ -82,12 +82,12 @@
                         </a>
                         <div class="dropdown-menu cczd" style="background: #319dca;" aria-labelledby="navbarDropdown">
                             <div class="inulli">
-                                <a class="dropdown-item" [routerLink]="['/signin']">Sing In<i class="fa fa-sign-in"
-                                        aria-hidden="true"></i></a>
+                                <a class="dropdown-item" [routerLink]="['/signin']">Admin Sing In<i
+                                        class="fa fa-sign-in" aria-hidden="true"></i></a>
                             </div>
                             <div class="inulli">
-                                <a class="dropdown-item" [routerLink]="['/signup']">Sing Up<i class="fa fa-user-plus"
-                                        aria-hidden="true"></i></a>
+                                <a class="dropdown-item" [routerLink]="['/signup']">Admin Sing Up<i
+                                        class="fa fa-user-plus" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </li>
@@ -97,19 +97,6 @@
                 <a class="nav-link" routerLink="/sociallogin">Social Login</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-
-            <div class="col-lg-12">
-                <table width="100%" border="0">
-                    <tr>
-                        <td><input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
-                                style="border-radius: 0px;"></td>
-                        <td><button class="btn btn-outline-success my-sm-0 searchbtn"
-                                style="border-radius: 0px; width: -webkit-fill-available;" type="button">Search</button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </form>
+        <app-header-search-box [stype]='searchtype'></app-header-search-box>
     </div>
 </nav>

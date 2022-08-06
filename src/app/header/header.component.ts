@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   // }
 
  
-
+searchtype:any="headersearchbox";
   logout_res: any;
   progress: number = 0;
   evenTotal: any;

@@ -7,7 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class RegisterApiServiceService {
-
+ 
   apiUrl = 'http://127.0.0.1:8000';
   bearerToken = "Bearer Cy5YBGTEwOCpSkilwp1rLqswinPFLmpTThgz99mVTMNO7kUw33ABUfPLB1MC";
   constructor(private http: HttpClient, private cookieService: CookieService) {
@@ -79,7 +79,45 @@ export class RegisterApiServiceService {
       }
     ]
   }
- 
+ ///////////////////////////dashboard page/video add start///////////////////////////
+  addvideolist(data: any) {
+    return this.http.post(this.apiUrl + '/myblog/access/addvideolist', data, {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+  viewallvideolist(num: number) {
+    return this.http.get(this.apiUrl + `/myblog/access/viewallvideolist?page=${num}`, {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+  updatevideo(data: any){
+    return this.http.post(this.apiUrl + '/myblog/access/updatevideo', data, {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+  deletevideo(num: number){
+  return this.http.delete(this.apiUrl + `/myblog/access/deletevideo/${num}`, {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+ ///////////////////////////dashboard page/video add end///////////////////////////
+
   ///////////////////////////user-class1 start///////////////////////////
   newpost(data: any) {
     return this.http.post(this.apiUrl + '/myblog/access/demotest', data, {
@@ -199,5 +237,61 @@ export class RegisterApiServiceService {
     );
   }
   ///////////////////logout end//////////////////////////////
+
+
+  ///////////////////frontend start//////////////////////////////
+
+
+
+   ///////////////////homepage video start//////////////////////////////
+  gethomevideo() {
+    return this.http.get(this.apiUrl + '/myblog/homevideolist', {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', this.bearerToken)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+   ///////////////////homepage video start//////////////////////////////
+
+   ///////////////////gallery start//////////////////////////////
+  getgallery() {
+    return this.http.get(this.apiUrl + '/myblog/gallery', {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', this.bearerToken)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+   ///////////////////gallery start//////////////////////////////
+
+
+ ///////////////////contact page start//////////////////////////////
+  countrylist() {
+    return this.http.get(this.apiUrl + '/myblog/countrylist', {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', this.bearerToken)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+   newcontact(data:any) {
+    return this.http.post(this.apiUrl + '/myblog/contactform',data, {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', this.bearerToken)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+   ///////////////////contact page start//////////////////////////////
+
+
+
+
+  ///////////////////frontend end//////////////////////////////
 
 }

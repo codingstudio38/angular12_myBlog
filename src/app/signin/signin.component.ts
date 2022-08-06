@@ -20,7 +20,7 @@ export class SigninComponent implements OnInit {
       this.router.navigate(['/user']);
     }
   } 
-
+ 
   loginForm = new FormGroup({
     emailid: new FormControl('', [Validators.required, Validators.email]),
     userAgent: new FormControl(window.navigator.userAgent),

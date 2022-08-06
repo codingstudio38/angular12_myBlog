@@ -18,7 +18,7 @@
   <link href="assets/css/style.css" rel="stylesheet">
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
-  <script src="https://connect.facebook.net/en_US/sdk.js" async defer crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -45,7 +45,9 @@
     }
     function getPage() {
       let name = window.location.pathname;
-      if (name == "/") {
+      if (name == "/home") {
+        pname = "Home";
+      } else if (name == "/") {
         pname = "Home";
       } else if (name == "/aboutus") {
         pname = "About Me";

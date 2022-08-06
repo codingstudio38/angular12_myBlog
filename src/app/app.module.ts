@@ -11,15 +11,16 @@ import { ContactComponent } from './contact/contact.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
-// import { NgxTwitterTimelineModule } from 'ngx-twitter-timeline';
-import { NgxTweetModule } from "ngx-tweet";
+//import { NgxTweetModule } from "ngx-tweet";
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SocialloginComponent } from './sociallogin/sociallogin.component';
-// import { NgxTwitterWidgetsModule } from "ngx-twitter-widgets";
+import { NgxTwitterTimelineModule } from 'ngx-twitter-timeline';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import {  GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
+import { CustomSrcPipe } from './healperpipe/custom-src.pipe';
+import { HeaderSearchBoxComponent } from './header-search-box/header-search-box.component';
 @NgModule({ 
   declarations: [
     AppComponent,
@@ -32,12 +33,13 @@ import {  GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-logi
     SigninComponent,
     SignupComponent,
     SocialloginComponent,
+    CustomSrcPipe,
+    HeaderSearchBoxComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    //NgxTwitterTimelineModule,
-    NgxTweetModule,
+    NgxTwitterTimelineModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

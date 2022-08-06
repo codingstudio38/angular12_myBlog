@@ -11,9 +11,9 @@ const routes: Routes = [
     component: HomeComponent, children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: DashboardComponent },
-      { path: 'class1', component: Class1Component },
+      { path: 'gallery', component: Class1Component },
       { path: 'class2', component: Class2Component },
-      { path: 'gallery', component: GalleryComponent },
+      { path: 'others', component: GalleryComponent },
     ]
   }
 ];

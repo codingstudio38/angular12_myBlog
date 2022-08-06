@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { RegisterApiServiceService } from '../../services/register-api-service.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
-
+ 
 @Component({
   selector: 'app-class1',
   templateUrl: './class1.component.html',
@@ -182,12 +182,12 @@ export class Class1Component implements OnInit {
     }
   }
   form2 = new FormGroup({
-    email1: new FormControl('', [Validators.required, Validators.email]),
+    email1: new FormControl('', [Validators.required]),
     userAgent: new FormControl(window.navigator.userAgent),
-    pwd1: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(10)]),
+    pwd1: new FormControl('', [Validators.required]),
     profilePic: new FormControl('', [Validators.required]),
   });
-
+ 
   get email1() {
     return this.form2.get('email1');
   }
@@ -262,7 +262,8 @@ export class Class1Component implements OnInit {
             if (this.search_result.status === 200) {
               this.updateform = new FormGroup({
                 updateid: new FormControl(this.search_result.userdata.id, [Validators.required]),
-                emailnew: new FormControl(this.search_result.userdata.email, [Validators.required, Validators.email]),
+                emailnew: new FormControl(this.search_result.userdata.email, [Validators.required]),
+                updatetype: new FormControl(this.search_result.userdata.password),
                 userAgent: new FormControl(window.navigator.userAgent, [Validators.required]),
                 oldfile: new FormControl(this.search_result.userdata.photo),
                 profilePicnew: new FormControl(''),
@@ -281,6 +282,30 @@ export class Class1Component implements OnInit {
       });
     }
   }
+
+  updateform = new FormGroup({
+    updateid: new FormControl(''),
+    emailnew: new FormControl('', [Validators.required]),
+    updatetype: new FormControl('', [Validators.required]),
+    userAgent: new FormControl(window.navigator.userAgent),
+    profilePicnew: new FormControl(''),
+    oldfile: new FormControl(''),
+  });
+
+  get updateid() {
+    return this.updateform.get('updateid');
+  }
+
+  get emailnew() {
+    return this.updateform.get('emailnew');
+  }
+  get userAgent() {
+    return this.updateform.get('userAgent');
+  }
+    get updatetype() {
+    return this.updateform.get('updatetype');
+  }
+
 
   searchuser(usersearch: any) {
     if (usersearch.value.userid == "") {
@@ -307,9 +332,10 @@ export class Class1Component implements OnInit {
               this.search_status = this.search_result.status;
               if (this.search_result.status === 200) {
                 this.updateform = new FormGroup({
-                  updateid: new FormControl(this.search_result.userdata.id, [Validators.required]),
-                  emailnew: new FormControl(this.search_result.userdata.email, [Validators.required, Validators.email]),
-                  userAgent: new FormControl(window.navigator.userAgent, [Validators.required]),
+                  updateid: new FormControl(this.search_result.userdata.id),
+                  emailnew: new FormControl(this.search_result.userdata.email),
+                  updatetype: new FormControl(this.search_result.userdata.password),
+                  userAgent: new FormControl(window.navigator.userAgent),
                   oldfile: new FormControl(this.search_result.userdata.photo),
                   profilePicnew: new FormControl(''),
                 });
@@ -336,30 +362,14 @@ export class Class1Component implements OnInit {
       });
     }
   }
-  updateform = new FormGroup({
-    updateid: new FormControl(''),
-    emailnew: new FormControl('', [Validators.required, Validators.email]),
-    userAgent: new FormControl(window.navigator.userAgent),
-    profilePicnew: new FormControl(''),
-    oldfile: new FormControl(''),
-  });
 
-  get updateid() {
-    return this.updateform.get('updateid');
-  }
-
-  get emailnew() {
-    return this.updateform.get('emailnew');
-  }
-  get userAgent() {
-    return this.updateform.get('userAgent');
-  }
 
   userupdate() {
     const upForm = new FormData();
     upForm.append('oldfile', this.updateform.get('oldfile')?.value);
     upForm.append('profilePic', this.updateform.get('profilePicnew')?.value);
     upForm.append('email', this.updateform.get('emailnew')?.value);
+    upForm.append('password', this.updateform.get('updatetype')?.value);
     upForm.append('user_agent', this.updateform.get('userAgent')?.value);
     upForm.append('updateid', this.updateform.get('updateid')?.value);
     if (this.API.loggedinuserdata() === 0) {

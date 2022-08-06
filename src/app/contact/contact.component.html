@@ -35,19 +35,19 @@
                     <div class="address">
                         <i class="bi bi-geo-alt"></i>
                         <h4>Location:</h4>
-                        <p>A108 Adam Street, New York, NY 535022</p>
+                        <p>Jaydev Vihar Bhubaneswar</p>
                     </div>
 
                     <div class="email">
                         <i class="bi bi-envelope"></i>
                         <h4>Email:</h4>
-                        <p>info@example.com</p>
+                        <p>bidyut.mandal@fit2live.in</p>
                     </div>
 
                     <div class="phone">
                         <i class="bi bi-phone"></i>
                         <h4>Call:</h4>
-                        <p>+1 5589 55488 55s</p>
+                        <p>+91 7735501335</p>
                     </div>
 
                 </div>
@@ -55,33 +55,111 @@
             </div>
 
             <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="100">
+                <div class="parent-component" [ngSwitch]="box">
 
-                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                    <div class="alert alert-success" role="alert" *ngSwitchCase="200">
+                        {{ box_message }}
+                    </div>
+
+
+                    <div class="alert alert-danger" role="alert" *ngSwitchCase="400">
+                        {{ box_message }}
+                    </div>
+
+                    <div *ngSwitchDefault>
+
+                    </div>
+                </div>
+                <form role="form" class="php-email-form" [formGroup]="contact_form" (ngSubmit)="contact()">
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
-                                required>
+                            <input type="text" name="name" class="form-control" id="name" #name placeholder="Your Name"
+                                required formControlName="contact_name">
+                            <span class="text-danger lab-invalid"
+                                *ngIf="contact_name && contact_name.invalid && contact_name.touched">
+                                Field
+                                is
+                                not valid</span>
                         </div>
                         <div class="col-md-6 form-group mt-3 mt-md-0">
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"
-                                required>
+                            <input type="email" class="form-control" name="email" id="email" #email
+                                placeholder="Your Email" required formControlName="contact_email">
+                            <span class="text-danger lab-invalid"
+                                *ngIf="contact_email && contact_email.invalid && contact_email.touched">
+                                Field
+                                is
+                                not valid</span>
                         </div>
                     </div>
-                    <div class="form-group mt-3">
-                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
-                            required>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <select name="country" #country id="country" class="form-control" required
+                                (change)="GetFlag(country.value)" style="height: 44px"
+                                formControlName="contact_country">
+                                <option value="">Select Country</option>
+                                <option *ngFor="let item of counrty_list" value="{{ item.name }}">{{ item.name }}
+                                </option>
+                            </select>
+                            <span class="text-danger lab-invalid"
+                                *ngIf="contact_country && contact_country.invalid && contact_country.touched">
+                                Field
+                                is
+                                not valid</span>
+                        </div>
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td width="15%">
+                                        <div class="form-control"
+                                            style="border-radius: 3px 0px 0px 3px; border-right: 0px;height: 44px"
+                                            [innerHTML]='falg'>
+
+                                        </div>
+                                    </td>
+                                    <td width="85%">
+                                        <input type="text" class="form-control" name="phone" id="phone" #phone
+                                            [placeholder]='contact_placeholder' required
+                                            onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                            style="border-radius: 0px 3px 3px 0px;" formControlName="contact_phone">
+                                    </td>
+                                </tr>
+                            </table>
+                            <span class="text-danger lab-invalid"
+                                *ngIf="contact_phone && contact_phone.invalid && contact_phone.touched">
+                                Field
+                                is
+                                not valid</span>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <input type="text" class="form-control" name="subject" id="subject" #subject
+                            placeholder="Subject" required formControlName="contact_subject">
+                        <span class="text-danger lab-invalid"
+                            *ngIf="contact_subject && contact_subject.invalid && contact_subject.touched">
+                            Field
+                            is
+                            not valid</span>
                     </div>
                     <div class="form-group mt-3">
-                        <textarea class="form-control" name="message" rows="5" placeholder="Message"
-                            required></textarea>
+                        <textarea class="form-control" name="message" id="message" #message rows="5"
+                            placeholder="Message" required formControlName="contact_message"></textarea>
+                        <span class="text-danger lab-invalid"
+                            *ngIf="contact_message && contact_message.invalid && contact_message.touched">
+                            Field
+                            is
+                            not valid</span>
                     </div>
                     <div class="my-3">
                         <div class="loading">Loading</div>
                         <div class="error-message"></div>
                         <div class="sent-message">Your message has been sent. Thank you!</div>
                     </div>
-                    <div class="text-center"><button type="submit">Send Message</button></div>
+                    <div class="text-center"><button type="submit" [disabled]="contact_form.invalid">Send
+                            Message</button></div>
                 </form>
+
+
+
 
             </div>
 

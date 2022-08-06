@@ -7,44 +7,179 @@
                     new</button>
                 <form #addressForm="ngForm" (ngSubmit)="formValue()">
                     <div *ngFor="let list of formlist; let i=index;">
-                        <button type="button" class="btn btn-danger mb-2" style="float: right;"
-                            (click)="removeThis(i)">Remove</button>
+                        <button type="button" class="btn btn-danger mb-2" style="float: right;" (click)="removeThis(i)"
+                            requird>Remove</button>
                         <br><br>
                         <div class="form-group row">
                             <label for="title" class="col-sm-2 col-form-label">Video Title</label>
                             <div class="col-sm-10">
                                 <input type="text" [(ngModel)]="list.title" class="form-control"
-                                    name="title_{{list.id}}" id="title_{{list.id}}" placeholder="Title">
+                                    name="title_{{list.id}}" id="title_{{list.id}}" placeholder="Title" requird>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="link" class="col-sm-2 col-form-label">Video Link</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" [(ngModel)]="list.link" name="link_{{list.id}}"
-                                    id="link_{{list.id}}" placeholder="www.youtubevideolink.vom">
+                                <input type="link" class="form-control" [(ngModel)]="list.link" name="link_{{list.id}}"
+                                    id="link_{{list.id}}" placeholder="www.youtubevideolink.vom" requird>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="link" class="col-sm-2 col-form-label">Video Title Link</label>
+                            <div class="col-sm-10">
+                                <input type="link" class="form-control" [(ngModel)]="list.link_href"
+                                    name="link_{{list.id}}" id="link_{{list.id}}" placeholder="Video Title Link"
+                                    requird>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="date" class="col-sm-2 col-form-label">Date</label>
                             <div class="col-sm-10">
                                 <input type="date" class="form-control" [(ngModel)]="list.date" name="date_{{list.id}}"
-                                    id="date_{{list.id}}" placeholder="www.youtubevideolink.vom">
+                                    id="date_{{list.id}}" placeholder="www.youtubevideolink.vom" requird>
                             </div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success btn-block">Add Video</button>
                 </form>
                 <br>
-                <button class="btn btn-info" (click)="checkuser()">Check login user</button><br>
-                {{ loginuser | json }}
-
-
-
-
+                <!-- <button class="btn btn-info" (click)="checkuser()">Check login user</button><br>
+                {{ loginuser | json }} -->
 
             </div>
             <div class="col-md-4">
                 <app-user-details></app-user-details>
+            </div>
+        </div>
+
+        <br>
+        <div *ngIf="datatime; then viewloader else viewdatatbl">
+        </div>
+        <ng-template #viewloader>
+            <div class="text-center">
+                <img src="assets/images/loader.gif" style="width: 45px; height:45px;" alt="">
+            </div>
+        </ng-template>
+        <ng-template #viewdatatbl>
+        </ng-template>
+        <table class="table table-striped table-dark" width="100%">
+            <thead>
+                <tr>
+                    <th>Sl No.</th>
+                    <th>ID</th>
+                    <th>Titel</th>
+                    <th>Link</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody style="border-top:0px;">
+                <tr
+                    *ngFor="let item of tbldata | paginate: { itemsPerPage: 5, currentPage: page, totalItems: total }; let i=index;">
+                    <td>{{item.slno}}</td>
+                    <td>{{ item.id }}</td>
+                    <td>
+                        <textarea style="width: 150px; overflow-x:scroll;">{{ item.title }} </textarea>
+                    </td>
+                    <td>
+                        <a class="btnnew btn btn-info" href="{{ item.link }}" target="_blank">View</a>
+                    </td>
+                    <td>
+                        <a class="btnnew btn btn-info" href="{{ item.link_href }}" target="_blank">View</a>
+                    </td>
+                    <td>{{ item.date | date:'fullDate' }}</td>
+                    <td>
+                        <button type="button" class="btnnew btn btn-danger" (click)="deletevideo(item.id)">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="btnnew btn btn-warning" style="margin-left:5px ;"
+                            (click)="openPopup(item)">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot style="background-color: white;">
+                <tr>
+                    <td colspan="7" align="center">
+                        <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+
+<div class="modal" aria-labelledby="exampleModalLabel" aria-hidden="true" tabindex="-1" role="dialog"
+    [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">User Detail</h4>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="updateform" (ngSubmit)="updatevideo()">
+                    <input type="hidden" formControlName="id" class="form-control" name="id" id="id" placeholder="id"
+                        requird>
+                    <table width="100%">
+                        <tr>
+                            <td>Title: </td>
+                            <td><input type="text" formControlName="title" class="form-control" name="title" id="title"
+                                    placeholder="Title" requird>
+                                <span class="text-danger lab-invalid"
+                                    *ngIf="title && title.invalid && title.touched">Email
+                                    Id
+                                    field
+                                    is
+                                    not valid</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Link</td>
+                            <td><input type="text" formControlName="link" class="form-control" name="link" id="link"
+                                    placeholder="Link" requird>
+                                <span class="text-danger lab-invalid" *ngIf="link && link.invalid && link.touched">Email
+                                    Id
+                                    field
+                                    is
+                                    not valid</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Video Title Link</td>
+                            <td><input type="text" formControlName="link_href" class="form-control" name="link_href"
+                                    id="link_href" placeholder="Video Title Link" requird>
+                                <span class="text-danger lab-invalid"
+                                    *ngIf="link_href && link_href.invalid && link_href.touched">Email
+                                    Link href
+                                    field
+                                    is
+                                    not valid</span>
+                            </td>
+                        </tr>link_href
+                        <tr>
+                            <td>Date: </td>
+                            <td><input type="date" formControlName="date" class="form-control" name="date" id="date"
+                                    requird>
+                                <span class="text-danger lab-invalid" *ngIf="date && date.invalid && date.touched">Email
+                                    Id
+                                    field
+                                    is
+                                    not valid</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <button type="submit" class="btn btn-success"
+                        style="cursor: pointer;width:100%;background-color: #40b110;"
+                        [disabled]="updateform.invalid">Update</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closePopup()">
+                    Close
+                </button>
             </div>
         </div>
     </div>

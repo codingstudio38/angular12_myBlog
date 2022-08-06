@@ -1,0 +1,13 @@
+<form autocomplete="off">
+    <div class="autocomplete" style="width:300px;">
+        <input id="myInput" type="text" #headersearchbox placeholder="search videos,gallery"
+            (keyup)="finddata(headersearchbox.value)" [value]='svalue'>
+        <div id="myInputautocomplete-list" class="autocomplete-items" *ngIf="showresult">
+
+            <div *ngFor="let item of allsearchdata" (click)="searchvalue(item.name)" [innerHTML]="item.thistag"></div>
+
+        </div>
+    </div>
+    <!-- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_autocomplete -->
+    <input type="submit" value="Search">
+</form>

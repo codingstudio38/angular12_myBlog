@@ -43,6 +43,7 @@
       </div>
     </div>
 
+
     <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
       <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
     </a>
@@ -58,10 +59,10 @@
 
   <!-- ======= Icon Boxes Section ======= -->
   <section id="icon-boxes" class="icon-boxes">
-    <div class="container">
+    <div class="container col-md-12">
 
       <div class="row">
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up">
+        <div class="col-md-6 col-lg-2 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up">
           <div class="icon-box">
             <div class="icon"><img src="assets/images/php.svg" width="36" height="36" alt=""></div>
             <h4 class="title"><a href="">About PHP</a></h4>
@@ -70,33 +71,44 @@
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-md-6 col-lg-2 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
           <div class="icon-box">
             <div class="icon"><img src="assets/images/Laravel.png" width="33" height="33" alt=""></div>
-            <h4 class="title"><a href="">About Laravel</a></h4>
+            <h4 class="title"><a href="javascript:void(0)">About Laravel</a></h4>
             <p class="description">Laravel is an open-source PHP framework, which is robust and easy to understand.
               Laravel reuses the existing components of different
               frameworks which helps in creating a web application.</p>
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
+        <div class="col-md-6 col-lg-2 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
           <div class="icon-box">
             <div class="icon"><img src="assets/images/codeigniter.png" width="40" height="40" alt=""></div>
-            <h4 class="title"><a href="">About CodeIgniter</a></h4>
+            <h4 class="title"><a href="javascript:void(0)">About CodeIgniter</a></h4>
             <p class="description">CodeIgniter is a powerful PHP framework with a very small footprint, built for
               developers who need a simple and elegant toolkit to create full-featured web applications.</p>
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
+        <div class="col-md-6 col-lg-2 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
           <div class="icon-box">
             <div class="icon">
               <img src="assets/images/angular.png" width="36" height="36" alt="">
             </div>
-            <h4 class="title"><a href="">About Angular</a></h4>
+            <h4 class="title"><a href="javascript:void(0)">About Angular</a></h4>
             <p class="description">Angular is a development platform, built on TypeScript. As a platform, Angular
               includes: A component-based framework for building scalable web applications.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-2 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
+          <div class="icon-box">
+            <div class="icon">
+              <img src="assets/images/react-icon-29.jpg" width="33" height="36" alt="">
+            </div>
+            <h4 class="title"><a href="javascript:void(0)">About ReactJS</a></h4>
+            <p class="description">React is a free and open-source front-end JavaScript library for building user
+              interfaces based on UI components. It is maintained by Meta and a community of individual developers and
+              companies.</p>
           </div>
         </div>
 
@@ -206,6 +218,18 @@
                     structure for developers to work with.</p>
                 </div>
               </li>
+              <li data-aos="fade-up" data-aos-delay="300">
+                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-6" class="collapsed"><span>07</span>What
+                  is<b> ReactJS</b> and why it is used?<i class="bx bx-chevron-down icon-show"></i><i
+                    class="bx bx-chevron-up icon-close"></i></a>
+                <div id="accordion-list-6" class="collapse" data-bs-parent=".accordion-list">
+                  <p style="text-align: justify;">React. js is an open-source JavaScript library that is used for
+                    building user interfaces specifically for single-page
+                    applications. It's used for handling the view layer for web and mobile apps. React also allows us to
+                    create reusable UI
+                    components.</p>
+                </div>
+              </li>
 
             </ul>
           </div>
@@ -227,73 +251,19 @@
       </div>
 
       <div class="row">
-        <div class="col-md-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-md-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100"
+          *ngFor="let item of alldata">
           <div class="icon-box" style="padding: 10px 10px;">
             <div style="margin-left: 0px;">
-              <iframe width="424" height="238" src="https://www.youtube.com/embed/T0Sp8q9w46A"
-                title="YouTube video player" frameborder="0"
+              <iframe width="424" height="238" [src]="item.link | customSrc" title="{{ item.title }}" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen></iframe>
             </div>
-            <h4 style="margin-left: 0px;"><a target="_blank" href="https://www.youtube.com/watch?v=T0Sp8q9w46A">How to
-                delete multiple
-                rows without page reload ?</a></h4>
+            <h4 style="margin-left: 0px;"><a target="_blank" href="{{ item.link_href }}">{{
+                item.title}}</a></h4>
           </div>
         </div>
-        <div class="col-md-4 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="200">
-          <div class="icon-box" style="padding: 10px 10px;">
-            <div style="margin-left: 0px;">
-              <iframe width="450" height="238" src="https://www.youtube.com/embed/GklFO3PQN5o"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            </div>
-            <h4 style="margin-left: 0px;"><a target="_blank"
-                href="https://www.youtube.com/watch?v=GklFO3PQN5o&t=116s">How to Insert
-                Multiple Rows Data using jQuery and PHP ?</a></h4>
-          </div>
-        </div>
-        <div class="col-md-4 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="300">
-          <div class="icon-box" style="padding: 10px 10px;">
-            <div style="margin-left: 0px;"><iframe width="424" height="238"
-                src="https://www.youtube.com/embed/vzBuT_0lHSY" title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe></div>
-            <h4 style="margin-left: 0px;"><a target="_blank" href="https://www.youtube.com/watch?v=vzBuT_0lHSY">How to
-                edit multiple
-                rows using PHP ?</a></h4>
-          </div>
-        </div>
-        <div class="col-md-4 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="400">
-          <div class="icon-box" style="padding: 10px 10px;">
-            <div style="margin-left: 0px;"><iframe width="424" height="238"
-                src="https://www.youtube.com/embed/CI0Y3Limxek" title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe></div>
-            <h4 style="margin-left: 0px;"><a target="_blank" href="#">How to delete multiple rows using PHP ?</a></h4>
-          </div>
-        </div>
-        <div class="col-md-4 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="500">
-          <div class="icon-box" style="padding: 10px 10px;">
-            <div style="margin-left: 0px;"><iframe width="424" height="238"
-                src="https://www.youtube.com/embed/nAF-WHgjJ5g" title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe></div>
-            <h4 style="margin-left: 0px;"><a target="_blank" href="https://www.youtube.com/watch?v=nAF-WHgjJ5g&t=1s">How
-                to render & view PDF to CANVAS in a web page using html and javascript ?</a>
-            </h4>
-          </div>
-        </div>
-        <div class="col-md-4 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="600">
-          <div class="icon-box" style="padding: 10px 10px;">
-            <div style="margin-left: 0px;"><iframe width="424" height="238"
-                src="https://www.youtube.com/embed/kA4OWq6FEoo" title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe></div>
-            <h4 style="margin-left: 0px;"><a target="_blank" href="https://www.youtube.com/watch?v=kA4OWq6FEoo&t=1s">How
-                to upload file using AJAX and PHP ?</a></h4>
-          </div>
-        </div>
+
       </div>
 
     </div>
