@@ -7,6 +7,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { AuthGuard } from './guards/auth.guard';
+import { SocialloginComponent } from './sociallogin/sociallogin.component';
 const routes: Routes = [
   {
     path: 'user',
@@ -14,30 +15,14 @@ const routes: Routes = [
     loadChildren: () => import('./user/user.module')
       .then(mod => mod.UserModule)
   },
-  {
-    path: '',
-    component: HomeComponent,
-  },
-  {
-    path: 'aboutus',
-    component: AboutComponent,
-  },
-  {
-    path: 'contactus',
-    component: ContactComponent,
-  },
-  {
-    path: 'gallery',
-    component: GalleryComponent,
-  },
-  {
-    path: 'signin',
-    component: SigninComponent,
-  },
-  {
-    path: 'signup',
-    component: SignupComponent,
-  }
+  {path: '',  redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home',component: HomeComponent },
+  {path: 'aboutus',component: AboutComponent},
+  {path: 'contactus', component: ContactComponent},
+  {path: 'gallery', component: GalleryComponent},
+  {path: 'signin', component: SigninComponent},
+  {path: 'signup', component: SignupComponent},
+  {path: 'sociallogin',component: SocialloginComponent}
 ];
 
 @NgModule({

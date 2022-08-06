@@ -1,0 +1,74 @@
+<app-header></app-header>
+<!-- ======= Cta Section ======= -->
+<section class="cta">
+    <div class="container" style="margin-bottom: -50px;">
+        <style>
+            .acd h1,
+            a {
+                color: white;
+                text-decoration: none;
+            }
+        </style>
+        <div class="row" data-aos="zoom-in">
+            <div class="col-lg-12 acd text-center text-lg-start">
+                <h1><a [routerLink]="['']">Home</a>/<a [routerLink]="['/sociallogin']">Social Login</a></h1>
+            </div>
+            <!-- <div class="col-lg-3 cta-btn-container text-center">
+                    <a class="cta-btn align-middle" href="#">Call To Action</a>
+                </div> -->
+        </div>
+
+    </div>
+</section><!-- End Cta Section -->
+
+
+<!-- ======= Team Section ======= -->
+<section class="team section-bg">
+    <div class="container" data-aos="fade-up">
+
+        <div class="container" style="max-width: 550px">
+            <div>
+                <div *ngIf="loggedIn==false">
+                    <button type="button" (click)="signInWithGoogle()" class="login-with-google-btn form-control">
+                        Sign in with Google
+                    </button>
+
+                    <button type="button" (click)="signInWithFB()" class="login-with-fb-btn form-control mt-3">
+                        Sign in with Facebook
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="loggedIn==true">
+                <div class="form-group">
+                    <label>User Photo</label>
+                    <div><img [src]=userphoto></div>
+                </div>
+                <div class="form-group">
+                    <label>User Id</label>
+                    <p></p>
+                    <input type="text" class="form-control" [value]=userid readonly>
+                </div>
+                <div class="form-group">
+                    <label>User Name</label>
+                    <input type="text" class="form-control" [value]=username readonly>
+                </div>
+                <div class="form-group">
+                    <label>User Email</label>
+                    <input type="text" class="form-control" [value]=useremail readonly>
+                </div>
+                <div *ngIf="provider=='GOOGLE'">
+                    <button type="button" (click)="googleSignOut()" style="background-position: 224px 14px;"
+                        class="login-with-google-btn form-control">Log
+                        Out</button>
+                </div>
+                <div *ngIf="provider=='FACEBOOK'">
+                    <button type="button" (click)="googleSignOut()" style="background-position: 224px 14px;"
+                        class="login-with-fb-btn form-control">Log
+                        Out</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section><!-- End Team Section -->
+<app-footer></app-footer>

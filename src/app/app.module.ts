@@ -16,8 +16,11 @@ import { NgxTweetModule } from "ngx-tweet";
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SocialloginComponent } from './sociallogin/sociallogin.component';
 // import { NgxTwitterWidgetsModule } from "ngx-twitter-widgets";
-@NgModule({
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {  GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
+@NgModule({ 
   declarations: [
     AppComponent,
     HomeComponent,
@@ -27,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     ContactComponent,
     GalleryComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    SocialloginComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,12 +40,35 @@ import { HttpClientModule } from '@angular/common/http';
     NgxTweetModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SocialLoginModule
   ],
   exports: [
     //HeaderComponent,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: true,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '405380673874-016n2egv9cukde6bvm3k2tijpmios0ve.apps.googleusercontent.com'
+            )
+          }, 
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('589535416126606')
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+   ], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

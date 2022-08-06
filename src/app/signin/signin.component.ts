@@ -19,7 +19,7 @@ export class SigninComponent implements OnInit {
     if (this.APIservice.checkuserIsloggedin()) {
       this.router.navigate(['/user']);
     }
-  }
+  } 
 
   loginForm = new FormGroup({
     emailid: new FormControl('', [Validators.required, Validators.email]),

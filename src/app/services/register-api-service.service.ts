@@ -79,7 +79,7 @@ export class RegisterApiServiceService {
       }
     ]
   }
-
+ 
   ///////////////////////////user-class1 start///////////////////////////
   newpost(data: any) {
     return this.http.post(this.apiUrl + '/myblog/access/demotest', data, {

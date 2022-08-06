@@ -7,50 +7,20 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <div *ngIf="headerCheck=='/'; then homeActive else homeDeactivate"></div>
-            <ng-template #homeActive>
-                <li class="nav-item active">
-                    <a class="nav-link" [routerLink]="['']">Home</a>
-                </li>
-            </ng-template>
-            <ng-template #homeDeactivate>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['']">Home</a>
-                </li>
-            </ng-template>
-            <div *ngIf="headerCheck=='/aboutus'; then aboutActive else aboutDeactivate"></div>
-            <ng-template #aboutActive>
-                <li class="nav-item active">
-                    <a class="nav-link" [routerLink]="['/aboutus']">About Me</a>
-                </li>
-            </ng-template>
-            <ng-template #aboutDeactivate>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/aboutus']">About Me</a>
-                </li>
-            </ng-template>
-            <div *ngIf="headerCheck=='/gallery'; then galleryActive else galleryDeactivate"></div>
-            <ng-template #galleryActive>
-                <li class="nav-item active">
-                    <a class="nav-link" [routerLink]="['/gallery']">Gallery</a>
-                </li>
-            </ng-template>
-            <ng-template #galleryDeactivate>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/gallery']">Gallery</a>
-                </li>
-            </ng-template>
-            <div *ngIf="headerCheck=='/contactus'; then contactActive else contactDeactivate"></div>
-            <ng-template #contactActive>
-                <li class="nav-item active">
-                    <a class="nav-link" [routerLink]="['/contactus']">Contant</a>
-                </li>
-            </ng-template>
-            <ng-template #contactDeactivate>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/contactus']">Contant</a>
-                </li>
-            </ng-template>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/home">Home</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/aboutus">About Me</a>
+            </li>
+            <li class="nav-item " routerLinkActive="active">
+                <a class="nav-link" routerLink="/gallery">Gallery</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/contactus">Contant</a>
+            </li>
+
+
             <li class="nav-item dropdown" *ngIf="dashboardmenu">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -66,7 +36,7 @@
                                 class="fa fa-sign-in" aria-hidden="true"></i></a>
                     </div>
                 </div>
-            </li> 
+            </li>
             <div [ngSwitch]="headerCheck" *ngIf="loginmenu">
                 <div style="color: rgb(252, 6, 6);" *ngSwitchCase="'/signin'">
                     <li class="nav-item dropdown active">
@@ -123,6 +93,9 @@
                     </li>
                 </div>
             </div>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/sociallogin">Social Login</a>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
 

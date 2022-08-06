@@ -15,7 +15,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     // this.checkLogin();
     if (this.APIservice.checkuserIsloggedin()) {
-      // this.router.navigate(['/user']);
       this.loginmenu = false;
       this.dashboardmenu = true;
     }
@@ -24,16 +23,16 @@ export class HeaderComponent implements OnInit {
 
   loginmenu: any = true;
   dashboardmenu: any = false;
-  checkLogin() {
-    var Userid = this.cookieService.get('myUserid');
-    var userName = this.cookieService.get('userName');
-    if (!(Userid == "")) {
-      this.loginmenu = false;
-      this.dashboardmenu = true;
-    }
-  }
+  // checkLogin() {
+  //   var Userid = this.cookieService.get('myUserid');
+  //   var userName = this.cookieService.get('userName');
+  //   if (!(Userid == "")) {
+  //     this.loginmenu = false;
+  //     this.dashboardmenu = true;
+  //   }
+  // }
 
-
+ 
 
   logout_res: any;
   progress: number = 0;
