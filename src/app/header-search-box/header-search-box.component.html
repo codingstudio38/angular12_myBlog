@@ -1,13 +1,13 @@
 <form autocomplete="off">
     <div class="autocomplete" style="width:300px;">
-        <input id="myInput" type="text" #headersearchbox placeholder="search videos,gallery"
+        <input id="myInput" type="text" #headersearchbox placeholder="search videos,gallery,country"
             (keyup)="finddata(headersearchbox.value)" [value]='svalue'>
         <div id="myInputautocomplete-list" class="autocomplete-items" *ngIf="showresult">
 
-            <div *ngFor="let item of allsearchdata" (click)="searchvalue(item.name)" [innerHTML]="item.thistag"></div>
+            <div *ngFor="let item of search_data" (click)="searchvalue(item.name)">{{ item.name }}</div>
 
         </div>
     </div>
-    <!-- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_autocomplete -->
+    <!-- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_autocomplete [innerHTML]="item.thistag"-->
     <input type="submit" value="Search">
 </form>

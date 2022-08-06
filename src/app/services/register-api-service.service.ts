@@ -289,7 +289,17 @@ export class RegisterApiServiceService {
   }
    ///////////////////contact page start//////////////////////////////
 
-
+ ///////////////////contact page start//////////////////////////////
+  searchdata(t:any,kw:any) {
+    return this.http.get(`${this.apiUrl}/myblog/headersearch?search_type=${t}&key_word=${kw}`, {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', this.bearerToken)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+   
 
 
   ///////////////////frontend end//////////////////////////////
