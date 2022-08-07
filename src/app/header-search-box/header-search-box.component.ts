@@ -50,10 +50,10 @@ searchvalue(val:any){
 
 
 search_res:any;
-search_data:any;
+search_data:any[]=[];
 finddata(kw:any) {
   if(kw==""){
-    this.search_data = null;
+    this.search_data = [];
     this.showresult=false;
   } else {
       this.API.searchdata(this.stype,kw).subscribe((response: HttpEvent<any>) => {
@@ -72,7 +72,21 @@ finddata(kw:any) {
             this.search_res = response.body;
             console.clear();
             //console.log(this.search_res);
-            this.search_data = this.search_res.data;
+            //this.search_data = this.search_res.data;
+            this.search_data = [];
+            for (let i = 0; i < this.search_res.data.length; i++) {
+            if (this.search_res.data[i].name.substr(0, kw.length).toUpperCase() == kw.toUpperCase()) {
+                    this.search_data.push({
+                      name:this.search_res.data[i].name,
+                      thistag:`<strong>${this.search_res.data[i].name.substr(0, kw.length)}</strong>${this.search_res.data[i].name.substr(kw.length)}`
+                    })
+                  }  else {
+                    this.search_data.push({
+                      name:this.search_res.data[i].name,
+                      thistag:this.search_res.data[i].name
+                    })
+                  }
+              } 
             this.showresult=true;
         }
       });

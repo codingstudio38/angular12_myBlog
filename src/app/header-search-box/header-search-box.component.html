@@ -4,7 +4,7 @@
             (keyup)="finddata(headersearchbox.value)" [value]='svalue'>
         <div id="myInputautocomplete-list" class="autocomplete-items" *ngIf="showresult">
 
-            <div *ngFor="let item of search_data" (click)="searchvalue(item.name)">{{ item.name }}</div>
+            <div *ngFor="let item of search_data" (click)="searchvalue(item.name)" [innerHTML]="item.thistag"></div>
 
         </div>
     </div>
