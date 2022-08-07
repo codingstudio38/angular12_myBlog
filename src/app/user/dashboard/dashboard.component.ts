@@ -157,6 +157,7 @@ viewalltbldata(num: number) {
             this.removeThis(i);
            }
            this.removeThis(0);
+           this.formlist=[];
            this.viewalltbldata(1);
         }
       });
