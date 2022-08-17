@@ -21,6 +21,9 @@ import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-logi
 import {  GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
 import { CustomSrcPipe } from './healperpipe/custom-src.pipe';
 import { HeaderSearchBoxComponent } from './header-search-box/header-search-box.component';
+import { MyblogComponent } from './myblog/myblog.component';
+import { MyNewBlogComponent } from './my-new-blog/my-new-blog.component';
+//import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 @NgModule({ 
   declarations: [
     AppComponent,
@@ -35,6 +38,8 @@ import { HeaderSearchBoxComponent } from './header-search-box/header-search-box.
     SocialloginComponent,
     CustomSrcPipe,
     HeaderSearchBoxComponent,
+    MyblogComponent,
+    MyNewBlogComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,8 @@ import { HeaderSearchBoxComponent } from './header-search-box/header-search-box.
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    SocialLoginModule
+    SocialLoginModule,
+    //InfiniteScrollModule,
   ],
   exports: [
     //HeaderComponent,

@@ -253,7 +253,7 @@ export class RegisterApiServiceService {
       catchError(this.errorMgmt)
     );
   }
-   ///////////////////homepage video start//////////////////////////////
+   ///////////////////homepage video end//////////////////////////////
 
    ///////////////////gallery start//////////////////////////////
   getgallery() {
@@ -265,7 +265,7 @@ export class RegisterApiServiceService {
       catchError(this.errorMgmt)
     );
   }
-   ///////////////////gallery start//////////////////////////////
+   ///////////////////gallery end//////////////////////////////
 
 
  ///////////////////contact page start//////////////////////////////
@@ -287,9 +287,9 @@ export class RegisterApiServiceService {
       catchError(this.errorMgmt)
     );
   }
-   ///////////////////contact page start//////////////////////////////
+   ///////////////////contact page end//////////////////////////////
 
- ///////////////////contact page start//////////////////////////////
+ ///////////////////header search start//////////////////////////////
   searchdata(t:any,kw:any) {
     return this.http.get(`${this.apiUrl}/myblog/headersearch?search_type=${t}&key_word=${kw}`, {
       reportProgress: true,
@@ -299,7 +299,19 @@ export class RegisterApiServiceService {
       catchError(this.errorMgmt)
     );
   }
-   
+   ///////////////////header search end////////////////////////////// 
+
+ ///////////////////header search start//////////////////////////////
+  getblogdata(p:any) {
+    return this.http.get(`${this.apiUrl}/myblog/allblogdata?page=${p}`, {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', this.bearerToken)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+   ///////////////////header search end////////////////////////////// 
 
 
   ///////////////////frontend end//////////////////////////////

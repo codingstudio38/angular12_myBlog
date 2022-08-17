@@ -8,6 +8,8 @@ import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { AuthGuard } from './guards/auth.guard';
 import { SocialloginComponent } from './sociallogin/sociallogin.component';
+import { MyblogComponent } from './myblog/myblog.component';
+import { MyNewBlogComponent } from './my-new-blog/my-new-blog.component';
 const routes: Routes = [
   {
     path: 'user',
@@ -22,7 +24,9 @@ const routes: Routes = [
   {path: 'gallery', component: GalleryComponent},
   {path: 'signin', component: SigninComponent},
   {path: 'signup', component: SignupComponent},
-  {path: 'sociallogin',component: SocialloginComponent}
+  {path: 'sociallogin',component: SocialloginComponent},
+  {path: 'myblog', component:MyblogComponent},
+  {path: 'blog', component:MyNewBlogComponent}
 ];
 
 @NgModule({

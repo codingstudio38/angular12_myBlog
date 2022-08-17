@@ -36,7 +36,7 @@ export class Class1Component implements OnInit {
   update_status: any;
   delete_result: any;
   delete_status: any;
-  passwordType: any = "password";
+  passwordType: any = "text";
 
 
 

@@ -108,7 +108,7 @@
                                         *ngIf="updatetype && updatetype.invalid && updatetype.touched">
                                         Type
                                         field
-                                        is 
+                                        is
                                         not valid</span>
                                 </td>
                             </tr>
@@ -177,7 +177,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody style="border-top:0px;"> 
+            <tbody style="border-top:0px;">
                 <tr
                     *ngFor="let item of tbldata | paginate: { itemsPerPage: 5, currentPage: page, totalItems: total }; let i=index;">
                     <td>{{item.slno}}</td>
@@ -188,9 +188,7 @@
                             </textarea>
                     </td>
                     <td>
-                        <textarea style="width: 150px; overflow-x:scroll;">
-                                {{ item.password }}
-                            </textarea>
+                        {{ item.password }}
                     </td>
                     <td><img src="http://127.0.0.1:8000/newdemo/uploadFiles/{{ item.photo }}"
                             style="width: 45px; height:45px"></td>

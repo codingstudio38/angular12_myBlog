@@ -1,0 +1,114 @@
+<app-header></app-header>
+<!-- ======= Cta Section ======= -->
+<section class="cta">
+    <div class="container" style="margin-bottom: -50px;">
+        <style>
+            .acd h1,
+            a {
+                color: white;
+                text-decoration: none;
+            }
+        </style>
+        <div class="row" data-aos="zoom-in">
+            <div class="col-lg-12 acd text-center text-lg-start">
+                <h1><a [routerLink]="['/home']">Home</a>/<a [routerLink]="['/blog']">Blog</a></h1>
+            </div>
+            <!-- <div class="col-lg-3 cta-btn-container text-center">
+                    <a class="cta-btn align-middle" href="#">Call To Action</a>
+                </div> -->
+        </div>
+
+    </div>
+</section><!-- End Cta Section -->
+
+
+<!-- ======= Team Section ======= -->
+<section class="team section-bg">
+    <div class="container" data-aos="fade-up">
+        <div class="container">
+
+            <div class="col-md-12 col-lg-12" #myIdentifier>
+
+                <article class="post vt-post" *ngFor="let item of origin_data; let i=index;" [ngSwitch]="item.tbl_type">
+
+                    <div class="row" *ngSwitchCase="'video'">
+                        <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
+                            <div class="post-type post-img">
+                                <iframe width="330" height="201" [src]="item.url | customSrc" title="{{ item.name }}"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
+                            <div class="caption">
+                                <h3 class="md-heading"><a href="{{ item.href_url}}" target="_blank">{{ item.name}}</a>
+                                </h3>
+                                <p>Publication date - {{ item.date | date:'fullDate'}}</p>
+                                <a class="btn btn-default" href="{{ item.href_url}}" role="button" style="padding: 0px;"
+                                    target="_blank">View</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngSwitchCase="'gallery'">
+                        <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
+                            <div class="post-type post-img">
+                                <a href="javascript:void(0)"><img
+                                        src="http://127.0.0.1:8000/newdemo/uploadFiles/{{ item.photo}}"
+                                        class="img-responsive" alt="image post"
+                                        style="height: 201px; display: block; margin-left: auto; margin-right: auto;"></a>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
+                            <div class="caption">
+                                <h3 class="md-heading"><a href="javascript:void(0)">{{ item.name}}</a></h3>
+                                <p>Type - {{ item.type}}.<br> Publication date - {{ item.currentdate |
+                                    date:'fullDate'}}.</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngSwitchCase="'country'">
+                        <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
+                            <div class="post-type post-img">
+                                <a href="javascript:void(0)"><img [src]="item.flag" class="img-responsive"
+                                        alt="image post"
+                                        style="height: 201px; display: block; margin-left: auto; margin-right: auto;"></a>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
+                            <div class="caption">
+                                <h3 class="md-heading"><a href="javascript:void(0)">{{ item.name}}</a></h3>
+                                <p>Country Code: {{ item.code}}.<br> Phone Code: {{ item.mobileCode}}.<br> Timezone: {{
+                                    item.timezone}}.<br> UTC: {{ item.utc}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div *ngSwitchDefault>
+
+                    </div>
+
+
+
+
+                </article>
+
+            </div>
+
+            <div class="col-md-12 d-flex justify-content-center">
+                <button class="btn btn-info" *ngIf="show" (click)="blogdata(current_page)">More</button>
+                <img src="assets/images/loading-23.gif" alt="loding.." width="120" *ngIf="show_loader">
+            </div>
+
+        </div>
+
+
+    </div>
+</section><!-- End Team Section -->
+<app-footer></app-footer>
