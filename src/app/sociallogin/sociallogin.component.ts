@@ -38,7 +38,7 @@ export class SocialloginComponent implements OnInit {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
       (res)=>{
         console.clear();
-       console.log(res); return;
+      // console.log(res); return;
       this.username = res.name;
       this.useremail = res.email;
       this.userid = res.id;

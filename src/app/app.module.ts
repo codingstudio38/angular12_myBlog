@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SocialloginComponent } from './sociallogin/sociallogin.component';
 import { NgxTwitterTimelineModule } from 'ngx-twitter-timeline';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-import {  GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
 import { CustomSrcPipe } from './healperpipe/custom-src.pipe';
 import { HeaderSearchBoxComponent } from './header-search-box/header-search-box.component';
 import { MyblogComponent } from './myblog/myblog.component';

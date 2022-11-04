@@ -13,7 +13,7 @@ export class MyNewBlogComponent implements OnInit {
   ngOnInit(): void {
    this.blogdata(this.current_page);
   }
-
+ 
 current_page:any=1;
 last_page:any=1;
 show:boolean=true;
@@ -26,8 +26,8 @@ origin_data:any[]=[];
 blogdata(page:any) {
   this.show=false;
   this.show_loader=true; 
-  setTimeout(()=>{
-  this.API.getblogdata(page).subscribe((response: HttpEvent<any>) => {
+  setTimeout(()=>{  
+  this.API.getblogdata(page,10).subscribe((response: HttpEvent<any>) => {
         // console.log(response);
         switch (response.type) {
           case HttpEventType.Sent:
@@ -65,11 +65,11 @@ blogdata(page:any) {
       },2000)
   }
 
-
-setdata(data:any){
-  this.origin_data.push(data);
-   console.log(this.origin_data);
-}
+ 
+// setdata(data:any){
+//   this.origin_data.push(data);
+//    console.log(this.origin_data);
+// }
 
 
 

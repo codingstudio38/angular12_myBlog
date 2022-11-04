@@ -302,8 +302,8 @@ export class RegisterApiServiceService {
    ///////////////////header search end////////////////////////////// 
 
  ///////////////////header search start//////////////////////////////
-  getblogdata(p:any) {
-    return this.http.get(`${this.apiUrl}/myblog/allblogdata?page=${p}`, {
+  getblogdata(p:any,l:number) { 
+    return this.http.get(`${this.apiUrl}/myblog/allblogdata?page=${p}&limit=${l}`, {
       reportProgress: true,
       observe: 'events',
       headers: new HttpHeaders().set('Authorization', this.bearerToken)
