@@ -65,7 +65,7 @@ export class MyblogComponent implements OnInit {
         if (315 * this.data.length - this.current_down < 300) {
            this.function_status=false;
           setTimeout(() => {
-            // this.onScrollDown();
+           // this.onScrollDown();
           }, 10);
           // console.clear();
           //console.log('Down');

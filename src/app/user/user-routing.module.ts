@@ -6,18 +6,18 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { Class2Component } from './class2/class2.component';
 import { GalleryComponent } from './gallery/gallery.component';
 const routes: Routes = [
-  {
+  { 
     path: '',
-    component: HomeComponent, children: [
+    component: HomeComponent, children: [ 
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: DashboardComponent },
       { path: 'gallery', component: Class1Component },
       { path: 'class2', component: Class2Component },
       { path: 'others', component: GalleryComponent },
     ]
-  }
-];
-
+  }   
+]; 
+ 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

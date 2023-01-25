@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
     // console.log(this.page);
     this.viewalltbldata(this.page);
   }
-
+ 
   viewtbldata: any;
   tbldata: any[] = [];
   gettbldata: any[] = [];

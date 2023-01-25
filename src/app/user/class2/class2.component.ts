@@ -9,7 +9,7 @@ declare var jQuery: any;
   styleUrls: ['./class2.component.css']
 })
 export class Class2Component implements OnInit {
-
+ 
   multiple_data: FormGroup;
   view_multiple_data: FormGroup;
   constructor(private API: RegisterApiServiceService, private formbuild: FormBuilder) {
@@ -29,7 +29,7 @@ export class Class2Component implements OnInit {
       customer_phone: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(10), Validators.maxLength(10)]),
     });
   }
-
+ 
   ngOnInit(): void {
 
   }

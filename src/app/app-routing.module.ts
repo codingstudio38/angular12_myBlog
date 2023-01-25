@@ -11,26 +11,26 @@ import { SocialloginComponent } from './sociallogin/sociallogin.component';
 import { MyblogComponent } from './myblog/myblog.component';
 import { MyNewBlogComponent } from './my-new-blog/my-new-blog.component';
 const routes: Routes = [
-  {
+  { 
     path: 'user',
     canActivate: [AuthGuard],
-    loadChildren: () => import('./user/user.module')
-      .then(mod => mod.UserModule)
+    loadChildren: () =>
+      import('./user/user.module').then((mod) => mod.UserModule),
   },
-  {path: '',  redirectTo: 'home', pathMatch: 'full'},
-  {path: 'home',component: HomeComponent },
-  {path: 'aboutus',component: AboutComponent},
-  {path: 'contactus', component: ContactComponent},
-  {path: 'gallery', component: GalleryComponent},
-  {path: 'signin', component: SigninComponent},
-  {path: 'signup', component: SignupComponent},
-  {path: 'sociallogin',component: SocialloginComponent},
-  {path: 'myblog', component:MyblogComponent},
-  {path: 'blog', component:MyNewBlogComponent}
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'aboutus', component: AboutComponent },
+  { path: 'contactus', component: ContactComponent },
+  { path: 'gallery', component: GalleryComponent },
+  { path: 'signin', component: SigninComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'sociallogin', component: SocialloginComponent },
+  { path: 'myblog', component: MyblogComponent },
+  { path: 'blog', component: MyNewBlogComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

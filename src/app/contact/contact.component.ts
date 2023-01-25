@@ -123,7 +123,7 @@ GetFlag(val:any){
        this.contact_placeholder = `${this.counrty_list[i].mobileCode}`;
      }
     }
-  } else {
+  } else { 
      this.falg = `<img src='assets/images/download.png' width='25' height='15'>`;
        this.contact_placeholder = `+ 00 | Contact No`;
   }

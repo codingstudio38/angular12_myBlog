@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { Class1Component } from './class1/class1.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Class2Component } from './class2/class2.component';
-import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination'; 
 import { GalleryComponent } from './gallery/gallery.component';
 @NgModule({
   declarations: [

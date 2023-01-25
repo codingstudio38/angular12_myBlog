@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { RegisterApiServiceService } from '../../services/register-api-service.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
- 
+  
 @Component({
   selector: 'app-class1',
   templateUrl: './class1.component.html',
@@ -13,11 +13,11 @@ export class Class1Component implements OnInit {
   constructor(private API: RegisterApiServiceService) {
     this.viewalltbldata(1);
     this.getUsers();
-  }
+  } 
 
   ngOnInit(): void {
-
-  }
+ 
+  } 
 
   filename: any = '';
   alldata: any = '';
@@ -38,10 +38,10 @@ export class Class1Component implements OnInit {
   delete_status: any;
   passwordType: any = "text";
 
-
+    
 
   displayStyle = "none";
-
+  
   modal_userid: any = "";
   modal_email: any = "";
   modal_photo: any = "";
@@ -52,7 +52,7 @@ export class Class1Component implements OnInit {
     this.modal_photo = data.photo;
     this.modal_date = data.currentdate;
     this.displayStyle = "block";
-  }
+  } 
   closePopup() {
     this.displayStyle = "none";
   }
