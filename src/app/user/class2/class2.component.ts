@@ -157,8 +157,8 @@ export class Class2Component implements OnInit {
   // npm install jquery --save
   // "scripts": [
   //   "node_modules/jquery/dist/jquery.min.js"
-  // ]
-  // declare var jQuery: any;
+  // ] 
+  // declare var jQuery: any; 
 
   multi_productdata: any;
   multi_search_res: any;
