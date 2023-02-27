@@ -6,7 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterApiServiceService {
+export class RegisterApiServiceService { 
  
   apiUrl = 'http://127.0.0.1:8000';
   bearerToken = "Bearer Cy5YBGTEwOCpSkilwp1rLqswinPFLmpTThgz99mVTMNO7kUw33ABUfPLB1MC";
