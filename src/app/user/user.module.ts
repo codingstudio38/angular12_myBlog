@@ -13,7 +13,7 @@ import { Class2Component } from './class2/class2.component';
 import { NgxPaginationModule } from 'ngx-pagination'; 
 import { GalleryComponent } from './gallery/gallery.component';
 @NgModule({
-  declarations: [
+  declarations: [ 
     HomeComponent,
     UserheaderComponent,
     UserDetailsComponent,
