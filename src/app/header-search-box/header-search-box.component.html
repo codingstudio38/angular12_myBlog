@@ -3,7 +3,7 @@
         <input id="myInput" type="text" #headersearchbox placeholder="search videos,gallery,country"
             (keyup)="finddata(headersearchbox.value)" [value]='svalue'>
         <div id="myInputautocomplete-list" class="autocomplete-items" *ngIf="showresult">
-
+ 
             <div *ngFor="let item of search_data" (click)="searchvalue(item.name)" [innerHTML]="item.thistag"></div>
 
         </div>

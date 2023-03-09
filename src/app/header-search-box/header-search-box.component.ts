@@ -54,7 +54,7 @@ finddata(kw:any) {
                     this.search_data.push({
                       name:this.search_res.data[i].name,
                       thistag:`<strong>${this.search_res.data[i].name.substr(0, kw.length)}</strong>${this.search_res.data[i].name.substr(kw.length)}`
-                    })
+                    }) 
                   }  else {
                     this.search_data.push({
                       name:this.search_res.data[i].name,
