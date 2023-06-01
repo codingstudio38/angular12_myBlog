@@ -17,7 +17,7 @@ import { GalleryComponent } from './gallery/gallery.component';
     HomeComponent,
     UserheaderComponent,
     UserDetailsComponent,
-    Class1Component,
+    Class1Component, 
     DashboardComponent,
     Class2Component,
     GalleryComponent,

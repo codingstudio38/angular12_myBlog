@@ -15,7 +15,7 @@ export class HeaderSearchBoxComponent implements OnInit {
  @Input() stype:any;
 
 showresult:boolean=false;
-
+   
 
 svalue:any=null;
 searchvalue(val:any){
@@ -27,7 +27,7 @@ searchvalue(val:any){
 search_res:any;
 search_data:any[]=[];
 finddata(kw:any) {
-  if(kw==""){
+  if(kw==""){ 
     this.search_data = [];
     this.showresult=false;
   } else {
@@ -48,7 +48,7 @@ finddata(kw:any) {
             console.clear();
             //console.log(this.search_res);
             //this.search_data = this.search_res.data;
-            this.search_data = [];
+            this.search_data = []; 
             for (let i = 0; i < this.search_res.data.length; i++) {
             if (this.search_res.data[i].name.substr(0, kw.length).toUpperCase() == kw.toUpperCase()) {
                     this.search_data.push({

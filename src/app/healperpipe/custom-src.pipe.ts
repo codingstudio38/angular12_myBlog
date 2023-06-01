@@ -11,4 +11,4 @@ constructor(private sanitizer: DomSanitizer) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(value);
   }
 
-}
+} 

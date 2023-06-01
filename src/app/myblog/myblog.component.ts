@@ -21,7 +21,7 @@ export class MyblogComponent implements OnInit {
   ngOnInit(): void {
     $(document).ready(() => {
       $('html, body').animate({ scrollTop: 0 }, 'slow');
-    });
+    }); 
   }
 
 
@@ -65,16 +65,16 @@ export class MyblogComponent implements OnInit {
         if (315 * this.data.length - this.current_down < 300) {
            this.function_status=false;
           setTimeout(() => {
-           // this.onScrollDown();
+            this.onScrollDown();//working
           }, 10);
           // console.clear();
           //console.log('Down');
         }
         if (this.checklocalscrolldown() > this.current_down) {
-           //if(this.current_down < 700 && this.data.length < 3){
-              // this.onScrollDown();
-           //}
-          //  if(this.current_down < 1000 && this.data.length < 6) {
+          //  if(this.current_down < 700 && this.data.length < 3){//no need
+          //     this.onScrollDown();
+          //  }
+          //  if(this.current_down < 1000 && this.data.length < 6) {//no need
           //     this.onScrollDown();
           //  }
         } else {

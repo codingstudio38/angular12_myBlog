@@ -11,7 +11,7 @@ import { SocialloginComponent } from './sociallogin/sociallogin.component';
 import { MyblogComponent } from './myblog/myblog.component';
 import { MyNewBlogComponent } from './my-new-blog/my-new-blog.component';
 const routes: Routes = [
-  {  
+  {
     path: 'user',
     canActivate: [AuthGuard],
     loadChildren: () =>

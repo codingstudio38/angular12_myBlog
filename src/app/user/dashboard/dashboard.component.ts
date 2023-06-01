@@ -11,7 +11,7 @@ import { HttpEvent, HttpEventType } from '@angular/common/http';
 export class DashboardComponent implements OnInit {
 
   constructor(private APIservice: RegisterApiServiceService, private cookieService: CookieService) {
-
+ 
   } 
  
   ngOnInit(): void {
@@ -222,7 +222,7 @@ if (confirm("Are you sure to delete this record ?")) {
 displayStyle = "none";
 openPopup(data: any) {
   this.updateform = new FormGroup({
-    id: new FormControl(data.id),
+    id: new FormControl(data.id), 
     title: new FormControl(data.title),
     link: new FormControl(data.link),
     date: new FormControl(data.date),

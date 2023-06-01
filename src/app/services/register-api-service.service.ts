@@ -293,7 +293,7 @@ export class RegisterApiServiceService {
   searchdata(t:any,kw:any) {
     return this.http.get(`${this.apiUrl}/myblog/headersearch?search_type=${t}&key_word=${kw}`, {
       reportProgress: true,
-      observe: 'events',
+      observe: 'events', 
       headers: new HttpHeaders().set('Authorization', this.bearerToken)
     }).pipe(
       catchError(this.errorMgmt)
