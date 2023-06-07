@@ -5,6 +5,7 @@ import { Class1Component } from './class1/class1.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Class2Component } from './class2/class2.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { MyformComponent } from './myform/myform.component';
 const routes: Routes = [
   { 
     path: '',
@@ -14,8 +15,9 @@ const routes: Routes = [
       { path: 'gallery', component: Class1Component },
       { path: 'class2', component: Class2Component },
       { path: 'others', component: GalleryComponent },
-    ]
-  }   
+      { path: 'form-validation', component: MyformComponent },
+    ] 
+  }    
 ]; 
  
 @NgModule({

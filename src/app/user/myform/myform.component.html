@@ -1,0 +1,85 @@
+<div class="container">
+
+    <!-- 
+https://blog.angular-university.io/angular-custom-validators/ 
+https://github.com/learnsmartcoding/angular-for-beginners/blob/main/src/app/admin/food/food-create/food-create.component.html
+https://github.com/learnsmartcoding/angular-for-beginners/blob/main/src/app/services/validators.ts
+https://github.com/learnsmartcoding/angular-for-beginners/blob/main/src/app/admin/food/food-create/food-create.component.ts
+-->
+    <div class="card bg-light">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4 class="card-title mt-3 text-center">Form Validation</h4>
+
+            <form [formGroup]="myform" (ngSubmit)="check()">
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    </div>
+                    <input name="" class="form-control" placeholder="Full name" type="text" formControlName="name">
+                    <span class="lab-invalid" *ngIf="name && name.invalid && name.touched">Name
+                        field is not
+                        valid</span>
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                    </div>
+                    <input name="" class="form-control" placeholder="Email address" type="email"
+                        formControlName="emailid">
+                    <span class="lab-invalid"
+                        *ngIf="myform.controls['emailid'].touched && myform.hasError('required','emailid')">{{
+                        myform.getError('message','emailid') }}</span>
+                    <span class="lab-invalid"
+                        *ngIf="myform.controls['emailid'].touched && myform.hasError('email','emailid')">{{
+                        myform.getError('message','emailid') }}</span>
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                    </div>
+                    <select class="custom-select" style="max-width: 120px;" formControlName="p_code">
+                        <option [selected]="true" value="">+00</option>
+                        <option value="91">+91</option>
+                    </select>
+                    <input name="" class="form-control" placeholder="Phone number" type="text"
+                        formControlName="phoneno">
+
+                    <span class="lab-invalid"
+                        *ngIf="myform.controls['phoneno'].touched && myform.hasError('required','phoneno')">1{{
+                        myform.getError('message','phoneno') }}</span>
+                    <span class="lab-invalid"
+                        *ngIf="myform.controls['phoneno'].touched && myform.hasError('minlength','phoneno')">2{{
+                        myform.getError('message','phoneno') }}</span>
+                    <span class="lab-invalid"
+                        *ngIf="myform.controls['phoneno'].touched && myform.hasError('maxlength','phoneno')">3{{
+                        myform.getError('message','phoneno') }}</span>
+                    <span class="lab-invalid"
+                        *ngIf="myform.controls['phoneno'].touched && myform.hasError('onlynumbers','phoneno')">4{{
+                        myform.getError('message','phoneno') }}</span>
+
+                    <span class="lab-invalid" *ngIf="p_code && p_code.invalid && p_code.touched">Phone no
+                        field is not
+                        valid</span>
+                </div>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input class="form-control" placeholder="Create password" type="password"
+                        formControlName="password">
+                    <span class="lab-invalid" *ngIf="password && password.invalid && password.touched">Password
+                        field is not
+                        valid</span>
+                </div> <!-- form-group// [disabled]="myform.invalid" -->
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block"> Create
+                        Account </button>
+                </div> <!-- form-group// -->
+                <p class="text-center">Have an account? <a href="">Log In</a> </p>
+            </form>
+        </article>
+    </div>
+
+</div>

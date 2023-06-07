@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
     profilePic: new FormControl('', [Validators.required]),
     phoneno: new FormControl('', [Validators.required, Validators.pattern('[0-9]+$'), Validators.minLength(10), Validators.maxLength(10)]),
     password: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(8)])
-
+ 
   })
   get name() {
     return this.registerForm.get('name');
