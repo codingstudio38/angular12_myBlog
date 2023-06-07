@@ -18,13 +18,13 @@ export class MyformComponent implements OnInit {
   ngOnInit(): void {
   }
 
- 
+  
   myform = new FormGroup({ 
-    name: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]+$')]),
-    emailid: new FormControl('', [CustomValidators.required('Email id required.'), CustomValidators.email('Enter a valid email.')]),
-    p_code: new FormControl('', [Validators.required]),
-    phoneno: new FormControl('', [CustomValidators.required('Phone no required.'), CustomValidators.minLength(10,'Phone no should be of minimum length 10'), CustomValidators.maxLength(10,'Phone no should be of maximum length 10'),CustomValidators.onlynumbers('Allow only numbers')]),
-    password: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(8)])
+    name: new FormControl('', [CustomValidators.namecheck('Enter your full name')]),
+    emailid: new FormControl('', [CustomValidators.emailcheck('Enter a valid email')]),
+    p_code: new FormControl('', [CustomValidators.required('Select country code')]),
+    phoneno: new FormControl('', [CustomValidators.phonecheck('Phone no required',10,10)]),
+    password: new FormControl('', [CustomValidators.passwordcheck('Password required',8,12)])
   })
   get name() {
     return this.myform.get('name');

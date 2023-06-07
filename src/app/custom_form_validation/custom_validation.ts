@@ -1,4 +1,4 @@
-import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 function isEmptyInputValue(value: any): boolean {
   // we don't check for string here so it also works with arrays
@@ -22,14 +22,14 @@ export class CustomValidators {
         return null; // don't validate empty values to allow optional controls
       }
       const value = parseFloat(control.value);
-      const returnData= !isNaN(value) && value < min
+      const returnData = !isNaN(value) && value < min
         ? {
-            min: { min: min, actual: control.value },
-            message: errorMessage || CustomValidators.message.fieldIsRequired,
-          }
+          min: { min: min, actual: control.value },
+          message: errorMessage || CustomValidators.message.fieldIsRequired,
+        }
         : null;
-        
-        return returnData;
+
+      return returnData;
     };
   }
 
@@ -41,9 +41,9 @@ export class CustomValidators {
       const value = parseFloat(control.value);
       return !isNaN(value) && value > max
         ? {
-            max: { max: max, actual: control.value },
-            message: errorMessage || CustomValidators.message.fieldIsRequired,
-          }
+          max: { max: max, actual: control.value },
+          message: errorMessage || CustomValidators.message.fieldIsRequired,
+        }
         : null;
     };
   }
@@ -52,9 +52,9 @@ export class CustomValidators {
     return (control: AbstractControl): ValidationErrors | null => {
       return +control.value <= 0
         ? {
-            mustBePositiveNumber: true,
-            message: errorMessage || CustomValidators.message.fieldIsInvalid,
-          }
+          mustBePositiveNumber: true,
+          message: errorMessage || CustomValidators.message.fieldIsInvalid,
+        }
         : null;
     };
   }
@@ -67,15 +67,15 @@ export class CustomValidators {
       return +control.value > value
         ? null
         : {
-            greaterThan: true,
-            message: errorMessage || CustomValidators.message.fieldIsInvalid,
-          };
+          greaterThan: true,
+          message: errorMessage || CustomValidators.message.fieldIsInvalid,
+        };
     };
   }
 
   static minLength(
     minLength: number,
-    errorMessage: string | null = null 
+    errorMessage: string | null = null
   ): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (isEmptyInputValue(control.value)) {
@@ -84,12 +84,12 @@ export class CustomValidators {
       const length: number = control.value ? control.value.length : 0;
       return length < minLength
         ? {
-            minlength: {
-              requiredLength: minLength,
-              actualLength: length,
-            },
-            message: errorMessage || CustomValidators.message.minLength(minLength),
-          }
+          minlength: {
+            requiredLength: minLength,
+            actualLength: length,
+          },
+          message: errorMessage || CustomValidators.message.minLength(minLength),
+        }
         : null;
     };
   }
@@ -102,65 +102,106 @@ export class CustomValidators {
       const length: number = control.value ? control.value.length : 0;
       return length > maxLength
         ? {
-            maxlength: {
-              requiredLength: maxLength,
-              actualLength: length,
-            },
-            message: errorMessage || CustomValidators.message.maxLength(maxLength),
-          }
+          maxlength: {
+            requiredLength: maxLength,
+            actualLength: length,
+          },
+          message: errorMessage || CustomValidators.message.maxLength(maxLength),
+        }
         : null;
     };
   }
 
 
-  static required(errorMessage: string |null= null): ValidatorFn {
+
+
+
+
+  static required(errorMessage: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       return isEmptyInputValue(control.value)
         ? {
-            required: true,
-            message: errorMessage || CustomValidators.message.fieldIsRequired
-          }
+          invalid: true,
+          message: errorMessage
+        }
         : null;
     };
   }
 
 
 
-
-  static email(
-    errorMessage: string | null = null 
-  ): ValidatorFn {
+  static namecheck(errorMessage: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      if (isEmptyInputValue(control.value)) {
-        return null; 
+       const validName = new RegExp('[a-zA-Z ]+$');
+       if (isEmptyInputValue(control.value)) {
+        return { invalid: true,  message: errorMessage};
+      } else if(!control.value.match(validName)) { 
+        return { invalid: true, message: 'Allow only alphabets(a-z,A-Z)' };
+      } else {
+         return null;
       }
+    };
+  }
+ 
+  static emailcheck(errorMessage: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
       const validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-      if(!control.value.match(validEmailRegex)){
-        return  {email: true,  message: errorMessage || 'invalid email id',}
-      } else{
-        return  null;;
-      }
-    };
-  }
-
-    static onlynumbers(
-    errorMessage: string | null = null 
-  ): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
       if (isEmptyInputValue(control.value)) {
-        return null; 
-      }
-      const validNumberRegex = /^[0-9]+$/;//Validators.pattern('[0-9]+$')
-      if(!control.value.match(validNumberRegex)){
-        return  {onlynumbers: true,  message: errorMessage || 'allow only numbers',}
-      } else{
-        return  null;;
+        return { invalid: true,  message: errorMessage};
+      } else if(!control.value.match(validEmailRegex)) { 
+        return { invalid: true, message: 'Enter a valid email id' };
+      } else {
+        return null;
       }
     };
   }
 
 
+  static phonecheck(errorMessage: string,min: number,max: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const length: number = control.value ? control.value.length : 0;
+      const validNumberRegex = /^[0-9]+$/;//Validators.pattern('[0-9]+$')
+      if (isEmptyInputValue(control.value)) {
+        return { invalid: true,  message: errorMessage};
+      } else if(!control.value.match(validNumberRegex)) { 
+        return { invalid: true, message: 'Allow only numbers' };
+      }  else if(length < min){
+        return { 
+          invalid: { requiredLength: min,  actualLength: length },
+          message: `Maximum length is ${min}`,
+        };
+      }else if(length > max){ 
+        return { 
+          invalid: { requiredLength: max,  actualLength: length },
+          message: `Maximum length is ${max}`,
+        };
+      } else {
+        return null;
+      }
+    };
+  }
 
+
+  static passwordcheck(errorMessage: string,min: number,max: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const length: number = control.value ? control.value.length : 0;
+      if (isEmptyInputValue(control.value)) {
+        return { invalid: true,  message: errorMessage};
+      } else if(length < min){
+        return { 
+          invalid: { requiredLength: min,  actualLength: length },
+          message: `Maximum length is ${min}`,
+        };
+      }else if(length > max){ 
+        return { 
+          invalid: { requiredLength: max,  actualLength: length },
+          message: `Maximum length is ${max}`,
+        };
+      } else {
+        return null;
+      }
+    };
+  }
 
 
 
