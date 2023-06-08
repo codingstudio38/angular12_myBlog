@@ -12,26 +12,29 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class MyformComponent implements OnInit {
 
-
+ 
   constructor() { }
  
   ngOnInit(): void {
   }
-
+ 
   
   myform = new FormGroup({ 
+    gender: new FormControl('', [CustomValidators.required('Gender required')]),
     name: new FormControl('', [CustomValidators.namecheck('Enter your full name')]),
     emailid: new FormControl('', [CustomValidators.emailcheck('Enter a valid email')]),
     p_code: new FormControl('', [CustomValidators.required('Select country code')]),
     phoneno: new FormControl('', [CustomValidators.phonecheck('Phone no required',10,10)]),
     password: new FormControl('', [CustomValidators.passwordcheck('Password required',8,12)])
   })
+
+  get gender() {
+    return this.myform.get('gender');
+  }
   get name() {
     return this.myform.get('name');
   }
-   
   get emailid() {
-    // console.log(this.myform.get('emailid'));
     return this.myform.get('emailid');
   }
   get phoneno() {
