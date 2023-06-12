@@ -44,13 +44,12 @@ export class SignupComponent implements OnInit {
   get profilePic() {
     return this.registerForm.get('profilePic');
   }
-  filename: any = '';
+  filename: any = '';  
   uploadFile(event: any): void {
     this.filename = event.target.files[0].name;
     this.registerForm.patchValue({
       profilePic: <File>event.target.files[0]
     });
-
   }
   registerPoint: boolean = false;
   apistatus: any;

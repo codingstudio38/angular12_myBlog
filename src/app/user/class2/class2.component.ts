@@ -14,7 +14,7 @@ export class Class2Component implements OnInit {
   view_multiple_data: FormGroup;
   constructor(private API: RegisterApiServiceService, private formbuild: FormBuilder) {
     this.getAllmultiUsers();
-    this.multiple_data = this.formbuild.group({
+    this.multiple_data = this.formbuild.group({ 
       allproduct: this.formbuild.array([]),
       cname: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
       cemail: new FormControl('', [Validators.required, Validators.email]),
