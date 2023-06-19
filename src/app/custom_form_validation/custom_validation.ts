@@ -122,7 +122,7 @@ export class CustomValidators {
         return null;
       }
     };
-  } 
+  }
 
   static required(errorMessage: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -135,24 +135,38 @@ export class CustomValidators {
     };
   }
 
-   static checkarraylength(errorMessage: string): ValidatorFn {
+  static checkarraylength(errorMessage: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      if(control.value.length <= 0 ){
-          return { invalid: true,message: errorMessage,}
-      } else{
+      if (control.value.length <= 0) {
+        return { invalid: true, message: errorMessage };
+      } else {
         return null;
       }
     };
   }
 
-   static filevalidation(errorMessage: string, filetype:any,mb:number): ValidatorFn {
+  static invalidfile(errorMessage: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      if(control.value.length <= 0 ){
-          return { invalid: true,message: errorMessage,}
-      } else{
-        return null;
-      }
+       return { invalid: true, message: errorMessage };
     };
+  }
+  static filevalidation(
+    errorMessage: string,
+    filetype: any,
+    mb: number
+  ): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if(isEmptyInputValue(control.value)){
+        return { invalid: true, message: errorMessage };
+      }
+      if (control.value.length <= 0) {
+        return { invalid: true, message: errorMessage };
+      } 
+    // const fileis = event.target.files[0];
+    // const filetype = event.target.files[0].type;
+    // const filesize: number = event.target.files[0].size;
+        return null;
+     };
   }
 
   static namecheck(errorMessage: string): ValidatorFn {
@@ -234,21 +248,4 @@ export class CustomValidators {
       }
     };
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 }

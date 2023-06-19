@@ -5,7 +5,9 @@ import {
   Validators,
   FormArray,
   FormBuilder,
-  AbstractControl
+  AbstractControl, 
+  ValidationErrors,
+  ValidatorFn
 } from '@angular/forms';
 import { RegisterApiServiceService } from './../../services/register-api-service.service';
 import { CustomValidators } from './../../custom_form_validation/custom_validation';
@@ -18,9 +20,9 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./myform.component.css'],
 })
 export class MyformComponent implements OnInit {
-  constructor(private formbuild: FormBuilder) { }
+  constructor(private formbuild: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   hobbies_list: Array<any> = [
     { id: 1, name: 'Playing' },
@@ -30,8 +32,7 @@ export class MyformComponent implements OnInit {
   ];
   myform = this.formbuild.group({
     photo: new FormControl('', [
-      this.checkFileType
-      //CustomValidators.required('Photo required'),//filevalidation('Photo required','/(\.jpg|\.png|\.JPG|\.PNG|\.jpeg|\.JPEG)$/',1)
+      CustomValidators.required('Photo required'), //filevalidation('Photo required','/(\.jpg|\.png|\.JPG|\.PNG|\.jpeg|\.JPEG)$/',1)
     ]),
     name: new FormControl('', [
       CustomValidators.namecheck('Enter your full name'),
@@ -49,9 +50,11 @@ export class MyformComponent implements OnInit {
       CustomValidators.passwordcheck('Password required', 8, 12),
     ]),
     gender: new FormControl('', [CustomValidators.required('Gender required')]),
-    hobbies: this.formbuild.array([], [CustomValidators.checkarraylength('Hobbies required')]),
+    hobbies: this.formbuild.array(
+      [],
+      [CustomValidators.checkarraylength('Hobbies required')]
+    ),
   });
-
 
   get photo() {
     return this.myform.get('photo');
@@ -95,22 +98,52 @@ export class MyformComponent implements OnInit {
     //console.log(this.myform.get('hobbies')?.value);
   }
 
-  uploadFile(event: any): void {
-    //  console.log(event.target.files);
-    if (event.target.length > 0) {
+  ex: Array<any> = ['image/png', 'image/jpeg'];
+  uploadFile(event: any): any {
+    if(event.target.value==""){
+      console.log(1);
+       this.myform.controls['photo'].setValidators([
+        CustomValidators.required('Photo required'),
+      ]);
+      return;
+    }
+    if (event.target.files.length <= 0) {
+      console.log(2);
+      this.myform.controls['photo'].setValidators([
+        CustomValidators.required('Photo required'),
+      ]);
+      return;
+    }
+    const fileis = event.target.files[0];
+    const filetype = event.target.files[0].type;
+    const filesize: number = event.target.files[0].size;
+    if (this.ex.indexOf(filetype) < 0) {
+        console.log(3);
+       this.myform.controls['photo'].setValidators([
+        CustomValidators.invalidfile('Allow only png,jpeg file'),
+      ]);
+      this.myform.setValue({photo: "" })
+      return;
+    } else {
+      console.log(filetype);
       this.myform.patchValue({
-        photo: <File>event.target.files[0]
+        photo: <File>event.target.file[0],
       });
     }
   }
-checkFileType(control: AbstractControl): { [key: string]: any } | null {
-    const files: File[] = control.value;
-    //  console.log(files);
-    if (files.length <= 0) {
-      return { invalid: true,message: 'Photo required',};
-    }
-   return null;
-}
+
+  static myfurequired(event: any): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if(control.value==""){
+        return { invalid: true, message: 'Photo required', }
+      }
+      if (event.target.length <= 0) {
+        return { invalid: true, message: 'Photo required', }
+      }
+      return null;
+    };
+  }
+
   check() {
     console.clear();
     console.log(this.myform);
