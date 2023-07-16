@@ -14,6 +14,7 @@ import { CustomValidators } from './../../custom_form_validation/custom_validati
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+declare var $: any;
 @Component({
   selector: 'app-myform',
   templateUrl: './myform.component.html',
@@ -22,7 +23,9 @@ import { CookieService } from 'ngx-cookie-service';
 export class MyformComponent implements OnInit {
   constructor(private formbuild: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+   
+  }
 
   hobbies_list: Array<any> = [
     { id: 1, name: 'Playing' },

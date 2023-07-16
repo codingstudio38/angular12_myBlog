@@ -30,6 +30,7 @@ import { HeaderSearchBoxComponent } from './header-search-box/header-search-box.
 import { MyblogComponent } from './myblog/myblog.component';
 import { MyNewBlogComponent } from './my-new-blog/my-new-blog.component';
 //import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+// import { HighchartsChartModule } from 'highcharts-angular';
 @NgModule({
   declarations: [
     AppComponent,

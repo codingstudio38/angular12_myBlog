@@ -18,7 +18,7 @@ export class MyblogComponent implements OnInit {
   @ViewChild('myIdentifier') myIdentifier: any;
   constructor(private API: RegisterApiServiceService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
     $(document).ready(() => {
       $('html, body').animate({ scrollTop: 0 }, 'slow');
     }); 
