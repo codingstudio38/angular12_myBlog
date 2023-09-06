@@ -31,6 +31,8 @@ import { MyblogComponent } from './myblog/myblog.component';
 import { MyNewBlogComponent } from './my-new-blog/my-new-blog.component';
 //import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 // import { HighchartsChartModule } from 'highcharts-angular';
+// import * as echarts from 'echarts';
+// import { NgxEchartsModule } from 'ngx-echarts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +59,7 @@ import { MyNewBlogComponent } from './my-new-blog/my-new-blog.component';
     HttpClientModule,
     SocialLoginModule,
     //InfiniteScrollModule,
+    //NgxEchartsModule.forRoot({ echarts }),
   ],
   exports: [
     //HeaderComponent,

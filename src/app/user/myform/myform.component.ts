@@ -26,7 +26,7 @@ export class MyformComponent implements OnInit {
   ngOnInit(): void {
    
   }
-
+ 
   hobbies_list: Array<any> = [
     { id: 1, name: 'Playing' },
     { id: 2, name: 'Singing' },
@@ -103,53 +103,54 @@ export class MyformComponent implements OnInit {
 
   ex: Array<any> = ['image/png', 'image/jpeg'];
   uploadFile(event: any): any {
-    if(event.target.value==""){
-      console.log(1);
-       this.myform.controls['photo'].setValidators([
-        CustomValidators.required('Photo required'),
-      ]);
-      return;
-    }
-    if (event.target.files.length <= 0) {
-      console.log(2);
-      this.myform.controls['photo'].setValidators([
-        CustomValidators.required('Photo required'),
-      ]);
-      return;
-    }
-    const fileis = event.target.files[0];
-    const filetype = event.target.files[0].type;
-    const filesize: number = event.target.files[0].size;
-    if (this.ex.indexOf(filetype) < 0) {
-        console.log(3);
-       this.myform.controls['photo'].setValidators([
-        CustomValidators.invalidfile('Allow only png,jpeg file'),
-      ]);
-      this.myform.setValue({photo: "" })
-      return;
+    let renderimg = document.getElementById('renderimg');
+    let fileis = event.target.files.length>0?event.target.files[0]:'';
+    let filetype = event.target.files.length>0?event.target.files[0].type:'';
+    let filesize: any = event.target.files.length>0?event.target.files[0].size:0;
+    let size:any =0;
+    if(fileis!==''){
+      $('#renderimg').attr({'src':URL.createObjectURL(fileis),'width':'100', 'height':'100'})
+      // console.log(URL.createObjectURL(fileis));//for bob url
+      // let reader = new FileReader();
+      // reader.onload = function(e) {
+      //     console.log(reader.result);//for base64
+      // };
+      // reader.readAsDataURL(fileis);
     } else {
-      console.log(filetype);
+      $('#renderimg').attr({'src':'','width':'', 'height':''})
+    }
+    if(event.target.value==""){
+      alert('Please select a file');
+      this.myform.patchValue({photo: "" })
+      return false;
+    } else if (event.target.files.length <= 0) {
+      alert('Please select a file.');
+      this.myform.patchValue({photo: "" })
+      return false;
+    } else if (this.ex.indexOf(filetype) < 0) {
+      alert('Please select png, jpeg file');
+      this.myform.patchValue({photo: "" })
+      // this.myform.controls['photo'].setValidators([
+      //   CustomValidators.invalidfile('Allow only png,jpeg file'),
+      // ]);
+      return false;
+    } else if(size > 500){
+      alert("Image size should be size less than 500 kb");
+       this.myform.patchValue({photo: "" });
+       return false;
+    } else {
       this.myform.patchValue({
-        photo: <File>event.target.file[0],
+        photo: <File>event.target.files[0],
       });
+      console.clear();
+      return true;
     }
   }
-
-  static myfurequired(event: any): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if(control.value==""){
-        return { invalid: true, message: 'Photo required', }
-      }
-      if (event.target.length <= 0) {
-        return { invalid: true, message: 'Photo required', }
-      }
-      return null;
-    };
-  }
-
+  
   check() {
     console.clear();
     console.log(this.myform);
+     console.log(this.myform.value);
     const Form = new FormData();
     Form.append('photo', this.myform.get('photo')?.value);
     Form.append('gender', this.myform.get('gender')?.value);
@@ -159,6 +160,6 @@ export class MyformComponent implements OnInit {
     Form.append('phone_code', this.myform.get('p_code')?.value);
     Form.append('hobbies', this.myform.get('hobbies')?.value);
     Form.append('password', this.myform.get('password')?.value);
-    console.log(Form);
+    // console.log(Form);
   }
 }
