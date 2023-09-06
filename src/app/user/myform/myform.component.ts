@@ -103,11 +103,10 @@ export class MyformComponent implements OnInit {
 
   ex: Array<any> = ['image/png', 'image/jpeg'];
   uploadFile(event: any): any {
-    let renderimg = document.getElementById('renderimg');
     let fileis = event.target.files.length>0?event.target.files[0]:'';
     let filetype = event.target.files.length>0?event.target.files[0].type:'';
     let filesize: any = event.target.files.length>0?event.target.files[0].size:0;
-    let size:any =0;
+    let size:any = (parseFloat(filesize) / 1024).toFixed(2);
     if(fileis!==''){
       $('#renderimg').attr({'src':URL.createObjectURL(fileis),'width':'100', 'height':'100'})
       // console.log(URL.createObjectURL(fileis));//for bob url
@@ -134,14 +133,13 @@ export class MyformComponent implements OnInit {
       //   CustomValidators.invalidfile('Allow only png,jpeg file'),
       // ]);
       return false;
-    } else if(size > 500){
+    } else if(parseFloat(size) > 500){
       alert("Image size should be size less than 500 kb");
        this.myform.patchValue({photo: "" });
        return false;
     } else {
-      this.myform.patchValue({
-        photo: <File>event.target.files[0],
-      });
+      console.clear();
+      this.myform.patchValue({ photo: <File>fileis});
       console.clear();
       return true;
     }
@@ -150,7 +148,7 @@ export class MyformComponent implements OnInit {
   check() {
     console.clear();
     console.log(this.myform);
-     console.log(this.myform.value);
+    console.log(this.myform.value);
     const Form = new FormData();
     Form.append('photo', this.myform.get('photo')?.value);
     Form.append('gender', this.myform.get('gender')?.value);
