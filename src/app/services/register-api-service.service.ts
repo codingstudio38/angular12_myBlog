@@ -3,12 +3,13 @@ import { HttpErrorResponse, HttpClient, HttpHeaders } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service'; 
+import {environment} from './../../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterApiServiceService { 
  
-  apiUrl = 'http://127.0.0.1:8000';
+  apiUrl = environment.apiUrl;
   bearerToken = "Bearer Cy5YBGTEwOCpSkilwp1rLqswinPFLmpTThgz99mVTMNO7kUw33ABUfPLB1MC";
   constructor(private http: HttpClient, private cookieService: CookieService) {
 
@@ -115,6 +116,21 @@ export class RegisterApiServiceService {
     }).pipe(
       catchError(this.errorMgmt)
     );
+  }
+
+ 
+  ExportPDF(page:any,limit:any):any{
+    return this.http.get(this.apiUrl +`/myblog/access/testpdf?page=${page}&limit=${limit}`, {
+      responseType: 'blob',
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
+    });
+  } 
+ 
+  ExporEXCEL(page:any,limit:any):any{
+    return this.http.get(this.apiUrl +`/myblog/access/testxl?page=${page}&limit=${limit}`, {
+      // responseType: 'blob',
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
+    });
   }
  ///////////////////////////dashboard page/video add end///////////////////////////
 

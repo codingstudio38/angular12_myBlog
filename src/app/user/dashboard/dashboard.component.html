@@ -70,14 +70,16 @@
                     <th></th>
                     <th></th>
                     <th></th>
-                    <th><button title="Export Excel" type="button" class="btn btn-success btn-sm"><i
-                                class="fa fa-file-excel-o" aria-hidden="true"></i></button></th>
-                    <th><button title="Export PDF" type="button" class="btn btn-success btn-sm"><i
-                                class="fa fa-file-pdf-o" aria-hidden="true"></i></button></th>
+                    <th><button (click)="DownloadExcel()" title="Export Excel" type="button"
+                            class="btn btn-success btn-sm"><i class="fa fa-file-excel-o"
+                                aria-hidden="true"></i></button></th>
+                    <th><button (click)="DownloadPDF()" title="Export PDF" type="button"
+                            class="btn btn-success btn-sm"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+                    </th>
                 </tr>
                 <tr>
                     <th>Sl No.</th>
-                    <th>ID</th>
+                    <th>ID</th> 
                     <th>Titel</th>
                     <th>Link</th>
                     <th>Date</th>
@@ -86,7 +88,7 @@
             </thead>
             <tbody style="border-top:0px;">
                 <tr
-                    *ngFor="let item of tbldata | paginate: { itemsPerPage: 5, currentPage: page, totalItems: total }; let i=index;">
+                    *ngFor="let item of tbldata | paginate: { itemsPerPage: limit, currentPage: page, totalItems: total }; let i=index;">
                     <td>{{item.slno}}</td>
                     <td>{{ item.id }}</td>
                     <td>

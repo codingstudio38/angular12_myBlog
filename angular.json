@@ -105,5 +105,8 @@
       }
     }
   },
-  "defaultProject": "myBlog"
+  "defaultProject": "myBlog",
+  "cli": {
+    "analytics": false
+  }
 }
