@@ -278,7 +278,7 @@ export class DashboardComponent implements OnInit {
       alert("Unauthorized..!! Please login."); return;
     }
     this.APIservice.ExportPDF(this.page,this.limit).subscribe((response:any) => {
-    //  console.log("ExportPDF ",response);
+      // console.log("ExportPDF ",response);
      	let blob:any = new Blob([response], { type: 'application/pdf; charset=utf-8' });
 			const url = window.URL.createObjectURL(blob);
       // console.log(url,blob);
@@ -297,6 +297,7 @@ export class DashboardComponent implements OnInit {
     }
     this.APIservice.ExporEXCEL(this.page,this.limit).subscribe((response: any) => {
      console.log("DownloadExcel ",response);
+      // var contentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
      	// let blob:any = new Blob([response], { type: 'application/excel; charset=utf-8' });
 			// const url = window.URL.createObjectURL(blob);
       // console.log(url,blob);

@@ -120,15 +120,16 @@ export class RegisterApiServiceService {
 
  
   ExportPDF(page:any,limit:any):any{
-    return this.http.get(this.apiUrl +`/myblog/access/testpdf?page=${page}&limit=${limit}`, {
+    return this.http.get(this.apiUrl +`/myblog/access/testpdff_data?page=${page}&limit=${limit}`, {
       responseType: 'blob',
       headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
     });
   } 
  
   ExporEXCEL(page:any,limit:any):any{
-    return this.http.get(this.apiUrl +`/myblog/access/testxl?page=${page}&limit=${limit}`, {
-      // responseType: 'blob',
+    
+    return this.http.get(this.apiUrl +`/myblog/access/testxll_data?page=${page}&limit=${limit}`, {
+      responseType: 'blob',
       headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
     });
   }
