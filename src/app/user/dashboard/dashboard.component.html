@@ -70,16 +70,17 @@
                     <th></th>
                     <th></th>
                     <th></th>
-                    <th><button (click)="DownloadExcel()" title="Export Excel" type="button"
-                            class="btn btn-success btn-sm"><i class="fa fa-file-excel-o"
+                    <th><button [disabled]="xlbtn" (click)="DownloadExcel()" title="Export Excel" type="button"
+                            class="btn btn-success btn-sm">Export <i class="fa fa-file-excel-o"
                                 aria-hidden="true"></i></button></th>
-                    <th><button (click)="DownloadPDF()" title="Export PDF" type="button"
-                            class="btn btn-success btn-sm"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+                    <th><button [disabled]="pdfbtn" (click)="DownloadPDF()" title="Export PDF" type="button"
+                            class="btn btn-success btn-sm">Export <i class="fa fa-file-pdf-o"
+                                aria-hidden="true"></i></button>
                     </th>
                 </tr>
                 <tr>
                     <th>Sl No.</th>
-                    <th>ID</th> 
+                    <th>ID</th>
                     <th>Titel</th>
                     <th>Link</th>
                     <th>Date</th>

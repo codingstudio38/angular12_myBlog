@@ -127,9 +127,13 @@ export class RegisterApiServiceService {
   } 
  
   ExporEXCEL(page:any,limit:any):any{
-    
-    return this.http.get(this.apiUrl +`/myblog/access/testxll_data?page=${page}&limit=${limit}`, {
-      responseType: 'blob',
+    return this.http.get(this.apiUrl +`/myblog/access/xl-data-expoert?page=${page}&limit=${limit}`, {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
+    });
+  }
+
+    DeleteFile(data:any):any{
+    return this.http.post(this.apiUrl +`/myblog/access/delete-file`,data, {
       headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
     });
   }

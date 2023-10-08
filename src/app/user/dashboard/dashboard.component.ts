@@ -1,24 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { FormControl, FormGroup, Validators, FormArray, FormBuilder } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormArray,
+  FormBuilder,
+} from '@angular/forms';
 import { RegisterApiServiceService } from '../../services/register-api-service.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import * as fileSaver from 'file-saver';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-
-  constructor(private APIservice: RegisterApiServiceService, private cookieService: CookieService) {
-
-  }
+  constructor(
+    private APIservice: RegisterApiServiceService,
+    private cookieService: CookieService
+  ) {}
   loginuser: any;
   page: number = 1;
-  limit:number = 5;
-  total: number =0;
- 
+  limit: number = 5;
+  total: number = 0;
+  xlbtn: boolean = false;
+  pdfbtn: boolean = false;
   ngOnInit(): void {
     this.viewalltbldata(this.page);
   }
@@ -38,7 +45,8 @@ export class DashboardComponent implements OnInit {
   viewalltbldata(num: number) {
     this.datatime = true;
     if (this.APIservice.loggedinuserdata() === 0) {
-      alert("Unauthorized..!! Please login."); return;
+      alert('Unauthorized..!! Please login.');
+      return;
     } else {
       this.APIservice.viewallvideolist(num).subscribe((response) => {
         switch (response.type) {
@@ -57,7 +65,7 @@ export class DashboardComponent implements OnInit {
             this.viewtbldata = response.body;
             this.check = [];
             this.tbldata = [];
-            this.tbl_data_status = "";
+            this.tbl_data_status = '';
             if (this.viewtbldata.status === 200) {
               if (this.viewtbldata.alldata.data.length > 0) {
                 this.gettbldata = this.viewtbldata.alldata.data;
@@ -76,8 +84,8 @@ export class DashboardComponent implements OnInit {
                     link: this.gettbldata[c].link,
                     date: this.gettbldata[c].date,
                     link_href: this.gettbldata[c].link_href,
-                    slno: this.check[c]
-                  })
+                    slno: this.check[c],
+                  });
                 }
               } else {
                 this.total = 0;
@@ -96,22 +104,23 @@ export class DashboardComponent implements OnInit {
             }
             this.datatime = false;
         }
-      })
+      });
     }
   }
-
 
   checkuser() {
     this.loginuser = this.APIservice.loggedinuserdata();
   }
 
-  public formlist: any[] = [{
-    id: 0,
-    title: '',
-    link: '',
-    date: '',
-    link_href: ''
-  }];
+  public formlist: any[] = [
+    {
+      id: 0,
+      title: '',
+      link: '',
+      date: '',
+      link_href: '',
+    },
+  ];
 
   addnew() {
     this.formlist.push({
@@ -119,61 +128,31 @@ export class DashboardComponent implements OnInit {
       title: '',
       link: '',
       date: '',
-      link_href: ''
+      link_href: '',
     });
   }
 
   removeThis(id: number) {
-    this.formlist.splice(id, 1)
+    this.formlist.splice(id, 1);
   }
-
 
   apistatus: any;
   formValue() {
     const rgForm = new FormData();
     for (var i = 0; i < this.formlist.length; i++) {
-      rgForm.append('id[]', "");
+      rgForm.append('id[]', '');
       rgForm.append('title[]', this.formlist[i].title);
       rgForm.append('link[]', this.formlist[i].link);
       rgForm.append('date[]', this.formlist[i].date);
       rgForm.append('link_href[]', this.formlist[i].link_href);
     }
     if (this.APIservice.loggedinuserdata() === 0) {
-      alert("Unauthorized..!! Please login."); return;
+      alert('Unauthorized..!! Please login.');
+      return;
     } else {
-      this.APIservice.addvideolist(rgForm).subscribe((response: HttpEvent<any>) => {
-        // console.log(response);
-        switch (response.type) {
-          case HttpEventType.Sent:
-            // console.log('Sent' + HttpEventType.Sent);
-            break;
-          case HttpEventType.ResponseHeader:
-            // console.log('ResponseHeader' + HttpEventType.ResponseHeader);
-            break;
-          case HttpEventType.UploadProgress:
-            // console.log('UploadProgress' + HttpEventType.UploadProgress);
-            break;
-          case HttpEventType.Response:
-            this.apistatus = response.body;
-            console.log(this.apistatus);
-            for (var i = 0; i < this.formlist.length; i++) {
-              this.removeThis(i);
-            }
-            this.removeThis(0);
-            this.formlist = [];
-            this.viewalltbldata(1);
-        }
-      });
-    }
-  }
-
-  delete_result: any;
-  deletevideo(id: any) {
-    if (confirm("Are you sure to delete this record ?")) {
-      if (this.APIservice.loggedinuserdata() === 0) {
-        alert("Unauthorized..!! Please login."); return;
-      } else {
-        this.APIservice.deletevideo(id).subscribe((response: HttpEvent<any>) => {
+      this.APIservice.addvideolist(rgForm).subscribe(
+        (response: HttpEvent<any>) => {
+          // console.log(response);
           switch (response.type) {
             case HttpEventType.Sent:
               // console.log('Sent' + HttpEventType.Sent);
@@ -185,16 +164,51 @@ export class DashboardComponent implements OnInit {
               // console.log('UploadProgress' + HttpEventType.UploadProgress);
               break;
             case HttpEventType.Response:
-              this.delete_result = response.body;
-              if (this.delete_result.status === 200) {
-                this.viewalltbldata(1);
-                alert(this.delete_result.message);
-              } else {
-                alert(this.delete_result.message);
+              this.apistatus = response.body;
+              console.log(this.apistatus);
+              for (var i = 0; i < this.formlist.length; i++) {
+                this.removeThis(i);
               }
-            // console.log(this.userdata);
+              this.removeThis(0);
+              this.formlist = [];
+              this.viewalltbldata(1);
           }
-        });
+        }
+      );
+    }
+  }
+
+  delete_result: any;
+  deletevideo(id: any) {
+    if (confirm('Are you sure to delete this record ?')) {
+      if (this.APIservice.loggedinuserdata() === 0) {
+        alert('Unauthorized..!! Please login.');
+        return;
+      } else {
+        this.APIservice.deletevideo(id).subscribe(
+          (response: HttpEvent<any>) => {
+            switch (response.type) {
+              case HttpEventType.Sent:
+                // console.log('Sent' + HttpEventType.Sent);
+                break;
+              case HttpEventType.ResponseHeader:
+                // console.log('ResponseHeader' + HttpEventType.ResponseHeader);
+                break;
+              case HttpEventType.UploadProgress:
+                // console.log('UploadProgress' + HttpEventType.UploadProgress);
+                break;
+              case HttpEventType.Response:
+                this.delete_result = response.body;
+                if (this.delete_result.status === 200) {
+                  this.viewalltbldata(1);
+                  alert(this.delete_result.message);
+                } else {
+                  alert(this.delete_result.message);
+                }
+              // console.log(this.userdata);
+            }
+          }
+        );
       }
     }
   }
@@ -222,7 +236,7 @@ export class DashboardComponent implements OnInit {
   get link_href() {
     return this.updateform.get('link_href');
   }
-  displayStyle = "none";
+  displayStyle = 'none';
   openPopup(data: any) {
     this.updateform = new FormGroup({
       id: new FormControl(data.id),
@@ -231,78 +245,141 @@ export class DashboardComponent implements OnInit {
       date: new FormControl(data.date),
       link_href: new FormControl(data.link_href),
     });
-    this.displayStyle = "block";
+    this.displayStyle = 'block';
   }
   closePopup() {
-    this.displayStyle = "none";
+    this.displayStyle = 'none';
   }
   update: any;
   updatevideo() {
     if (this.APIservice.loggedinuserdata() === 0) {
-      alert("Unauthorized..!! Please login."); return;
+      alert('Unauthorized..!! Please login.');
+      return;
     } else {
-      this.APIservice.updatevideo(this.updateform.value).subscribe((response: HttpEvent<any>) => {
-        // console.log(response);
-        switch (response.type) {
-          case HttpEventType.Sent:
-            // console.log('Sent' + HttpEventType.Sent);
-            break;
-          case HttpEventType.ResponseHeader:
-            // console.log('ResponseHeader' + HttpEventType.ResponseHeader);
-            break;
-          case HttpEventType.UploadProgress:
-            // console.log('UploadProgress' + HttpEventType.UploadProgress);
-            break;
-          case HttpEventType.Response:
-            this.update = response.body;
-            // console.log(this.update);
-            if (this.update.status == 200) {
-              alert(this.update.message);
-            } else {
-              alert(this.update.message);
-            }
-            this.closePopup();
-            this.viewalltbldata(1);
+      this.APIservice.updatevideo(this.updateform.value).subscribe(
+        (response: HttpEvent<any>) => {
+          // console.log(response);
+          switch (response.type) {
+            case HttpEventType.Sent:
+              // console.log('Sent' + HttpEventType.Sent);
+              break;
+            case HttpEventType.ResponseHeader:
+              // console.log('ResponseHeader' + HttpEventType.ResponseHeader);
+              break;
+            case HttpEventType.UploadProgress:
+              // console.log('UploadProgress' + HttpEventType.UploadProgress);
+              break;
+            case HttpEventType.Response:
+              this.update = response.body;
+              // console.log(this.update);
+              if (this.update.status == 200) {
+                alert(this.update.message);
+              } else {
+                alert(this.update.message);
+              }
+              this.closePopup();
+              this.viewalltbldata(1);
+          }
         }
-      });
+      );
     }
   }
 
-  DownloadPDF():any {
+  DownloadPDF(): any {
+    this.xlbtn = true;
+    this.pdfbtn = true;
     const databoj = new Date();
-    let month: any = databoj.getMonth()+1 <=9 ? `0${databoj.getMonth()+1}`:databoj.getMonth()+1;
-    let date: any = databoj.getDate() <=9 ? `0${databoj.getDate()}`:databoj.getDate();
-    let today:any = `${databoj.getFullYear()}-${month}-${date}`
+    let month: any =
+      databoj.getMonth() + 1 <= 9
+        ? `0${databoj.getMonth() + 1}`
+        : databoj.getMonth() + 1;
+    let date: any =
+      databoj.getDate() <= 9 ? `0${databoj.getDate()}` : databoj.getDate();
+    let today: any = `${databoj.getFullYear()}-${month}-${date}`;
     //npm install @types/file-saver --save-dev
     if (this.APIservice.loggedinuserdata() === 0) {
-      alert("Unauthorized..!! Please login."); return;
+      alert('Unauthorized..!! Please login.');
+      return;
     }
-    this.APIservice.ExportPDF(this.page,this.limit).subscribe((response:any) => {
-      // console.log("ExportPDF ",response);
-     	let blob:any = new Blob([response], { type: 'application/pdf; charset=utf-8' });
-			const url = window.URL.createObjectURL(blob);
-      // console.log(url,blob);
-			fileSaver.saveAs(blob, `pdf-file-${today}.pdf`);
-    }, (error: any) => console.error('Error downloading the pdf file.. ',error));
-
-  }  
-
-  DownloadExcel() {
-    const databoj = new Date();
-    let month: any = databoj.getMonth()+1 <=9 ? `0${databoj.getMonth()+1}`:databoj.getMonth()+1;
-    let date: any = databoj.getDate() <=9 ? `0${databoj.getDate()}`:databoj.getDate();
-    let today:any = `${databoj.getFullYear()}-${month}-${date}`
-    if (this.APIservice.loggedinuserdata() === 0) {
-      alert("Unauthorized..!! Please login."); return;
-    }
-    this.APIservice.ExporEXCEL(this.page,this.limit).subscribe((response: any) => {
-     console.log("DownloadExcel ",response);
-      // var contentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-     	// let blob:any = new Blob([response], { type: 'application/excel; charset=utf-8' });
-			// const url = window.URL.createObjectURL(blob);
-      // console.log(url,blob);
-			// fileSaver.saveAs(blob, `excel-file-${today}.pdf`);
-    }, (error: any) => console.error('Error downloading the excel file.. ',error));
+    this.APIservice.ExportPDF(this.page, this.limit).subscribe(
+      (response: any) => {
+        // console.log("ExportPDF ",response);
+        let blob: any = new Blob([response], {
+          type: 'application/pdf; charset=utf-8',
+        });
+        const url = window.URL.createObjectURL(blob);
+        // console.log(url,blob);
+        fileSaver.saveAs(blob, `pdf-file-${today}.pdf`);
+        this.xlbtn = false;
+        this.pdfbtn = false;
+      },
+      (error: any) => {
+        this.xlbtn = false;
+        this.pdfbtn = false;
+        console.error('Error downloading the pdf file.. ', error);
+      }
+    );
   }
 
+  DownloadExcel() {
+    this.xlbtn = true;
+    this.pdfbtn = true;
+    const databoj = new Date();
+    let month: any =
+      databoj.getMonth() + 1 <= 9
+        ? `0${databoj.getMonth() + 1}`
+        : databoj.getMonth() + 1;
+    let date: any =
+      databoj.getDate() <= 9 ? `0${databoj.getDate()}` : databoj.getDate();
+    let today: any = `${databoj.getFullYear()}-${month}-${date}`;
+    if (this.APIservice.loggedinuserdata() === 0) {
+      alert('Unauthorized..!! Please login.');
+      return;
+    }
+    this.APIservice.ExporEXCEL(this.page, this.limit).subscribe(
+      (response: any) => {
+        //  console.log("DownloadExcel ",response);
+        if (response.status == 200) {
+          window.location.href = response.file_url;
+          this.DeleteFile(response.file_url, 'excelfile');
+        } else {
+          alert(response.message);
+        }
+        this.xlbtn = false;
+        this.pdfbtn = false;
+        // var contentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+        // let blob:any = new Blob([response], { type: 'application/excel; charset=utf-8' });
+        // const url = window.URL.createObjectURL(blob);
+        // console.log(url,blob);
+        // fileSaver.saveAs(blob, `excel-file-${today}.pdf`);
+      },
+      (error: any) => {
+        this.xlbtn = false;
+        this.pdfbtn = false;
+        console.error('Error downloading the excel file.. ', error);
+      }
+    );
+  }
+
+  DeleteFile(filelink: any, deletetype: any) {
+    if (this.APIservice.loggedinuserdata() === 0) {
+      alert('Unauthorized..!! Please login.');
+      return;
+    }
+    const myform = new FormData();
+    myform.append('filelink', filelink);
+    myform.append('deletetype', deletetype);
+    setTimeout(() => {
+      this.APIservice.DeleteFile(myform).subscribe(
+        (response: any) => {
+          if (response.status == 200) {
+            console.log(response.message);
+          } else {
+            console.error(response.message);
+          }
+        },
+        (error: any) => console.error('Error.. ', error)
+      );
+    }, 3000);
+  }
 }
