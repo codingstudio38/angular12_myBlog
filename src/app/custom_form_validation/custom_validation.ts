@@ -211,7 +211,7 @@ export class CustomValidators {
       } else if (length < min) {
         return {
           invalid: { requiredLength: min, actualLength: length },
-          message: `Maximum length is ${min}`,
+          message: `Minimum length is ${min}`,
         };
       } else if (length > max) {
         return {
