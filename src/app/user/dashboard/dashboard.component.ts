@@ -297,6 +297,7 @@ export class DashboardComponent implements OnInit {
       databoj.getDate() <= 9 ? `0${databoj.getDate()}` : databoj.getDate();
     let today: any = `${databoj.getFullYear()}-${month}-${date}`;
     //npm install @types/file-saver --save-dev
+    //npm install file-saver --save
     if (this.APIservice.loggedinuserdata() === 0) {
       alert('Unauthorized..!! Please login.');
       return;
