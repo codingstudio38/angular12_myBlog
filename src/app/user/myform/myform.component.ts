@@ -222,7 +222,7 @@ export class MyformComponent implements OnInit {
         // console.log(reader.result);//croped image base64 data
       };
       reader.readAsDataURL(container.files[0]);
-      return true;
+      return true; 
     }
     return false;
   }
