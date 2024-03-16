@@ -337,4 +337,22 @@ export class RegisterApiServiceService {
 
   ///////////////////frontend end//////////////////////////////
 
+
+
+
+//////////////////////////cht box work start///////////////////////////
+  getChatUserlist(data: any) {
+    return this.http.get(this.apiUrl + '/myblog/access/chat-user-list?name='+data, {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+
+//////////////////////////cht box work end///////////////////////////
+
+
+
 }
