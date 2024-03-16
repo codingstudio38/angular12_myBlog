@@ -13,6 +13,7 @@ import { Class2Component } from './class2/class2.component';
 import { NgxPaginationModule } from 'ngx-pagination'; 
 import { GalleryComponent } from './gallery/gallery.component';
 import { MyformComponent } from './myform/myform.component';
+import { ChatBoxComponent } from './chat-box/chat-box.component';
 @NgModule({
   declarations: [ 
     HomeComponent,
@@ -23,6 +24,7 @@ import { MyformComponent } from './myform/myform.component';
     Class2Component,
     GalleryComponent,
     MyformComponent,
+    ChatBoxComponent,
   ],
   imports: [
     CommonModule,
