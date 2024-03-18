@@ -5,7 +5,13 @@
 export const environment = {
   production: false,
   apiUrl:"http://127.0.0.1:8000",
-  filepath:"http://127.0.0.1:8000/myBlog/"
+  filepath:"http://127.0.0.1:8000/myBlog/",
+  broadcaster: 'pusher',
+  wskey: 'ABCDEFGH',
+  wscluster: 'mt1',
+  wsHost: `localhost`,
+  wsPort: 6001,
+  wsforceTLS:false
 };
 
 /*
