@@ -7,29 +7,32 @@ import { RegisterApiServiceService } from '../services/register-api-service.serv
 })
 export class ChatServiceService {
 
-  constructor( private APIservice: RegisterApiServiceService,) { }
+  constructor(private APIservice: RegisterApiServiceService,) { }
+  private websocketvar: any = false;
 
-websocket() : Echo{
-   return new Echo({
+  websocketFN() {
+    this.websocketvar = new Echo({
       broadcaster: 'pusher',
       key: environment.wskey,
       cluster: environment.wscluster,
       // wsHost: window.location.hostname, // this also work
-      wsHost:environment.wsHost,// this also work
+      wsHost: environment.wsHost,// this also work
       wsPort: environment.wsPort,
       forceTLS: environment.wsforceTLS,
       disableStats: true,
-      enabledTransports:['ws'],
-      authEndpoint:`${environment.apiUrl}/custom/broadcasting/auth`,
-      auth:{ 
-        headers:{
-          Authorization:`Bearer ${this.APIservice.loggedinuserdata().token}`,
+      enabledTransports: ['ws'],
+      authEndpoint: `${environment.apiUrl}/custom/broadcasting/auth`,
+      auth: {
+        headers: {
+          Authorization: `Bearer ${this.APIservice.loggedinuserdata().token}`,
         }
       }
     });
   }
 
-
+  websocket(): Echo {
+    return this.websocketvar;
+  }
 
 
 

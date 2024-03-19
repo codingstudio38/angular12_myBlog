@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { CookieService } from 'ngx-cookie-service'; 
-import {environment} from './../../environments/environment'
+import { CookieService } from 'ngx-cookie-service';
+import { environment } from './../../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterApiServiceService { 
- 
+export class RegisterApiServiceService {
+
   apiUrl = environment.apiUrl;
   bearerToken = "Bearer Cy5YBGTEwOCpSkilwp1rLqswinPFLmpTThgz99mVTMNO7kUw33ABUfPLB1MC";
   constructor(private http: HttpClient, private cookieService: CookieService) {
@@ -80,7 +80,7 @@ export class RegisterApiServiceService {
       }
     ]
   }
- ///////////////////////////dashboard page/video add start///////////////////////////
+  ///////////////////////////dashboard page/video add start///////////////////////////
   addvideolist(data: any) {
     return this.http.post(this.apiUrl + '/myblog/access/addvideolist', data, {
       reportProgress: true,
@@ -99,7 +99,7 @@ export class RegisterApiServiceService {
       catchError(this.errorMgmt)
     );
   }
-  updatevideo(data: any){
+  updatevideo(data: any) {
     return this.http.post(this.apiUrl + '/myblog/access/updatevideo', data, {
       reportProgress: true,
       observe: 'events',
@@ -108,8 +108,8 @@ export class RegisterApiServiceService {
       catchError(this.errorMgmt)
     );
   }
-  deletevideo(num: number){
-  return this.http.delete(this.apiUrl + `/myblog/access/deletevideo/${num}`, {
+  deletevideo(num: number) {
+    return this.http.delete(this.apiUrl + `/myblog/access/deletevideo/${num}`, {
       reportProgress: true,
       observe: 'events',
       headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
@@ -118,26 +118,26 @@ export class RegisterApiServiceService {
     );
   }
 
- 
-  ExportPDF(page:any,limit:any):any{
-    return this.http.get(this.apiUrl +`/myblog/access/testpdff_data?page=${page}&limit=${limit}`, {
+
+  ExportPDF(page: any, limit: any): any {
+    return this.http.get(this.apiUrl + `/myblog/access/testpdff_data?page=${page}&limit=${limit}`, {
       responseType: 'blob',
-      headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
-    });
-  } 
- 
-  ExporEXCEL(page:any,limit:any):any{
-    return this.http.get(this.apiUrl +`/myblog/access/xl-data-expoert?page=${page}&limit=${limit}`, {
       headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
     });
   }
 
-    DeleteFile(data:any):any{
-    return this.http.post(this.apiUrl +`/myblog/access/delete-file`,data, {
+  ExporEXCEL(page: any, limit: any): any {
+    return this.http.get(this.apiUrl + `/myblog/access/xl-data-expoert?page=${page}&limit=${limit}`, {
       headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
     });
   }
- ///////////////////////////dashboard page/video add end///////////////////////////
+
+  DeleteFile(data: any): any {
+    return this.http.post(this.apiUrl + `/myblog/access/delete-file`, data, {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
+    });
+  }
+  ///////////////////////////dashboard page/video add end///////////////////////////
 
   ///////////////////////////user-class1 start///////////////////////////
   newpost(data: any) {
@@ -264,7 +264,7 @@ export class RegisterApiServiceService {
 
 
 
-   ///////////////////homepage video start//////////////////////////////
+  ///////////////////homepage video start//////////////////////////////
   gethomevideo() {
     return this.http.get(this.apiUrl + '/myblog/homevideolist', {
       reportProgress: true,
@@ -274,9 +274,9 @@ export class RegisterApiServiceService {
       catchError(this.errorMgmt)
     );
   }
-   ///////////////////homepage video end//////////////////////////////
+  ///////////////////homepage video end//////////////////////////////
 
-   ///////////////////gallery start//////////////////////////////
+  ///////////////////gallery start//////////////////////////////
   getgallery() {
     return this.http.get(this.apiUrl + '/myblog/gallery', {
       reportProgress: true,
@@ -286,10 +286,10 @@ export class RegisterApiServiceService {
       catchError(this.errorMgmt)
     );
   }
-   ///////////////////gallery end//////////////////////////////
+  ///////////////////gallery end//////////////////////////////
 
 
- ///////////////////contact page start//////////////////////////////
+  ///////////////////contact page start//////////////////////////////
   countrylist() {
     return this.http.get(this.apiUrl + '/myblog/countrylist', {
       reportProgress: true,
@@ -299,8 +299,8 @@ export class RegisterApiServiceService {
       catchError(this.errorMgmt)
     );
   }
-   newcontact(data:any) {
-    return this.http.post(this.apiUrl + '/myblog/contactform',data, {
+  newcontact(data: any) {
+    return this.http.post(this.apiUrl + '/myblog/contactform', data, {
       reportProgress: true,
       observe: 'events',
       headers: new HttpHeaders().set('Authorization', this.bearerToken)
@@ -308,22 +308,22 @@ export class RegisterApiServiceService {
       catchError(this.errorMgmt)
     );
   }
-   ///////////////////contact page end//////////////////////////////
+  ///////////////////contact page end//////////////////////////////
 
- ///////////////////header search start//////////////////////////////
-  searchdata(t:any,kw:any) {
+  ///////////////////header search start//////////////////////////////
+  searchdata(t: any, kw: any) {
     return this.http.get(`${this.apiUrl}/myblog/headersearch?search_type=${t}&key_word=${kw}`, {
       reportProgress: true,
-      observe: 'events', 
+      observe: 'events',
       headers: new HttpHeaders().set('Authorization', this.bearerToken)
     }).pipe(
       catchError(this.errorMgmt)
     );
   }
-   ///////////////////header search end////////////////////////////// 
+  ///////////////////header search end////////////////////////////// 
 
- ///////////////////header search start//////////////////////////////
-  getblogdata(p:any,l:number) { 
+  ///////////////////header search start//////////////////////////////
+  getblogdata(p: any, l: number) {
     return this.http.get(`${this.apiUrl}/myblog/allblogdata?page=${p}&limit=${l}`, {
       reportProgress: true,
       observe: 'events',
@@ -332,7 +332,7 @@ export class RegisterApiServiceService {
       catchError(this.errorMgmt)
     );
   }
-   ///////////////////header search end////////////////////////////// 
+  ///////////////////header search end////////////////////////////// 
 
 
   ///////////////////frontend end//////////////////////////////
@@ -340,9 +340,18 @@ export class RegisterApiServiceService {
 
 
 
-//////////////////////////cht box work start///////////////////////////
+  //////////////////////////cht box work start///////////////////////////
   getChatUserlist(data: any) {
-    return this.http.get(this.apiUrl + '/myblog/access/chat-user-list?name='+data, {
+    return this.http.get(this.apiUrl + '/myblog/access/chat-user-list?name=' + data, {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+  CallCommonPOSTSrFn(data: any, url: any) {
+    return this.http.post(this.apiUrl + url, data, {
       reportProgress: true,
       observe: 'events',
       headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
@@ -351,7 +360,17 @@ export class RegisterApiServiceService {
     );
   }
 
-//////////////////////////cht box work end///////////////////////////
+  CallCommonGETSrFn(data: any, url: any) {
+    return this.http.get(this.apiUrl + url, {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)
+    }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+
+  //////////////////////////cht box work end///////////////////////////
 
 
 
