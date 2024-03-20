@@ -22,8 +22,12 @@
                     <ng-container *ngFor="let user of userlist; let i=index;">
                         <div class="chat_list" *ngIf="user.id!==loggedinuserdata.id">
                             <div class="chat_people">
-                                <div class="chat_img"> <img src="{{ envdata.filepath }}uploadFiles/{{ user.photo }}"
-                                        alt="sunil">
+                                <div class="chat_img">
+                                    <i class="fa fa-circle activeuser" alt="Online" title="Online"
+                                        id="activeuser_{{ user.id }}" aria-hidden="true"></i>
+                                    <i class="fa fa-circle deactivateuser" alt="Offline" title="Offline"
+                                        id="deactivateuser_{{ user.id }}" aria-hidden="true"></i>
+                                    <img src="{{ envdata.filepath }}uploadFiles/{{ user.photo }}" alt="sunil">
                                 </div>
                                 <div class="chat_ib">
                                     <h5>{{ user.name }}<span class="chat_date">Dec 25</span></h5>

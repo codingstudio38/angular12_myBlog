@@ -133,3 +133,14 @@ img{ max-width:100%;}
   height: 516px;
   overflow-y: auto;
 }
+.activeuser{
+color: rgb(116, 191, 3);
+font-size: small;
+display: none;
+}
+
+.deactivateuser {
+color: rgb(224, 132, 11);
+font-size: small;
+display: none;
+}

@@ -4,6 +4,7 @@ import { RegisterApiServiceService } from '../../services/register-api-service.s
 import { ChatServiceService } from '../../services/chat-service.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+declare var $:any;
 @Component({
   selector: 'app-chat-box',
   templateUrl: './chat-box.component.html',
@@ -13,7 +14,7 @@ export class ChatBoxComponent implements OnInit {
   constructor(
     private APIservice: RegisterApiServiceService,
     private chatservice: ChatServiceService
-  ) {}
+  ) { }
 
   envdata: any = environment;
 
@@ -69,11 +70,11 @@ export class ChatBoxComponent implements OnInit {
   }
 
   JoinAnUser(user: any) {
-  
+
   }
 
   LeaveAnUser(user: any) {
-   
+
   }
 
   userlist: any[] = [];
@@ -103,10 +104,10 @@ export class ChatBoxComponent implements OnInit {
   }
 
 
- getActiveUserlist() {
-  const f = new FormData();
-    f.append('channelname','presence-trackUserPresenceChatChannel');
-    this.APIservice.CallCommonPOSTSrFn(f,'/myblog/access/active-user-list').subscribe(
+  getActiveUserlist() {
+    const f = new FormData();
+    f.append('channelname', 'presence-trackUserPresenceChatChannel');
+    this.APIservice.CallCommonPOSTSrFn(f, '/myblog/access/active-user-list').subscribe(
       (response: HttpEvent<any>) => {
         // console.log(response);
         switch (response.type) {
@@ -122,9 +123,10 @@ export class ChatBoxComponent implements OnInit {
           case HttpEventType.Response:
             let apistatus: any = response.body;
             if (apistatus.status == 200) {
-              this.ActiveUsers=apistatus.users;
-                console.log(this.ActiveUsers);
-            } else{
+              this.ActiveUsers = apistatus.users;
+              // console.log(this.ActiveUsers);
+              this.checkOnlineOrOfflineArr();
+            } else {
               console.clear();
               console.error(apistatus);
             }
@@ -132,6 +134,35 @@ export class ChatBoxComponent implements OnInit {
       }
     );
   }
+
+
+  checkOnlineOrOfflineArr() {
+    // console.log(this.userlist);
+    setTimeout(()=>{
+    this.userlist.forEach((item: any) => {
+       if(this.checkuserId(item.id)){
+        $(`#activeuser_${item.id}`).css('display','block');
+        $(`#deactivateuser_${item.id}`).css('display','none');
+       } else{
+        $(`#activeuser_${item.id}`).css('display','none');
+        $(`#deactivateuser_${item.id}`).css('display','block');
+       }
+    })
+    },500)
+  }
+  checkuserId(id: any): boolean {
+    let check: boolean = false;
+    // console.log(this.ActiveUsers);
+    this.ActiveUsers.forEach((item: any) => {
+      if (item.userid == id) {
+        check = true;
+      }
+    })
+    return check;
+  }
+
+
+
 
 
 
