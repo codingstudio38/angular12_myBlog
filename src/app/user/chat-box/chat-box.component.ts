@@ -31,7 +31,7 @@ export class ChatBoxComponent implements OnInit {
     this.getChatUserlist();
   }
   ActiveUsers: any[] = [];
-  user_websocket_port: any = '';
+  user_websocket_id: any = '';
   websocket(): any {
     const WS: any = this.chatservice.websocket();
     WS.join('trackUserPresenceChatChannel') //channelname
@@ -66,7 +66,7 @@ export class ChatBoxComponent implements OnInit {
       .error((e: any) => {
         console.log('error', e);
       });
-    this.user_websocket_port = WS.socketId();
+    this.user_websocket_id = WS.socketId();
   }
 
   JoinAnUser(user: any) {
