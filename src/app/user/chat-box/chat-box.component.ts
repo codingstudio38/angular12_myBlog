@@ -4,7 +4,14 @@ import { RegisterApiServiceService } from '../../services/register-api-service.s
 import { ChatServiceService } from '../../services/chat-service.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-declare var $:any;
+declare var $: any;
+interface currentChatuserObj {
+  id: any,
+  name: any,
+  email: any,
+  phone: any,
+  photo: any
+};
 @Component({
   selector: 'app-chat-box',
   templateUrl: './chat-box.component.html',
@@ -138,17 +145,17 @@ export class ChatBoxComponent implements OnInit {
 
   checkOnlineOrOfflineArr() {
     // console.log(this.userlist);
-    setTimeout(()=>{
-    this.userlist.forEach((item: any) => {
-       if(this.checkuserId(item.id)){
-        $(`#activeuser_${item.id}`).css('display','block');
-        $(`#deactivateuser_${item.id}`).css('display','none');
-       } else{
-        $(`#activeuser_${item.id}`).css('display','none');
-        $(`#deactivateuser_${item.id}`).css('display','block');
-       }
-    })
-    },500)
+    setTimeout(() => {
+      this.userlist.forEach((item: any) => {
+        if (this.checkuserId(item.id)) {
+          $(`#activeuser_${item.id}`).css('display', 'block');
+          $(`#deactivateuser_${item.id}`).css('display', 'none');
+        } else {
+          $(`#activeuser_${item.id}`).css('display', 'none');
+          $(`#deactivateuser_${item.id}`).css('display', 'block');
+        }
+      })
+    }, 500)
   }
   checkuserId(id: any): boolean {
     let check: boolean = false;
@@ -161,7 +168,55 @@ export class ChatBoxComponent implements OnInit {
     return check;
   }
 
+  currentChatuser: currentChatuserObj = {
+    id: '', name: '', email: '', phone: '', photo: ''
+  };
+  totalchatofcurrentuser: any = '';
+  chatofcurrentuser: any[] = [];
+  setcurrentChatandStart(user: any) {
+    const f = new FormData();
+    f.append('from', this.loggedinuserdata.id);
+    f.append('to', user.id);
+    this.APIservice.CallCommonPOSTSrFn(f, '/myblog/access/user-chat-list').subscribe(
+      (response: HttpEvent<any>) => {
+        // console.log(response);
+        switch (response.type) {
+          case HttpEventType.Sent:
+            // console.log('Sent' + HttpEventType.Sent);
+            break;
+          case HttpEventType.ResponseHeader:
+            // console.log('ResponseHeader' + HttpEventType.ResponseHeader);
+            break;
+          case HttpEventType.UploadProgress:
+            // console.log('UploadProgress' + HttpEventType.UploadProgress);
+            break;
+          case HttpEventType.Response:
+            let apistatus: any = response.body;
+            if (apistatus.status == 200) {
+              // console.log(apistatus);
+              this.totalchatofcurrentuser = apistatus.total;
+              this.chatofcurrentuser = apistatus.data;
+              this.currentChatuser = {
+                id: user.id, name: user.name, email: user.email, phone: user.phone, photo: user.photo
+              };
+              $('.chat_people').removeClass('active_chat');
+              $(`#chat_people${user.id}`).addClass('active_chat');
+            }
+        }
+      }
+    );
 
+
+  }
+
+checkFromChat(from:any,userid:any):boolean{
+  if(from==userid){
+    return true;
+  } else {
+     return false;
+  }
+
+}
 
 
 

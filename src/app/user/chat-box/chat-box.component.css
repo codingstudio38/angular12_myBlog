@@ -88,7 +88,7 @@ img{ max-width:100%;}
 .received_withd_msg { width: 57%;}
 .mesgs {
   float: left;
-  padding: 30px 15px 0 25px;
+  padding: 0 20px 0 20px;
   width: 60%;
 }
 
@@ -143,4 +143,46 @@ display: none;
 color: rgb(224, 132, 11);
 font-size: small;
 display: none;
+}
+
+.chat_people{
+  cursor: pointer;
+}
+
+.chat-header {
+  padding: 20px;
+  background: aliceblue;
+}
+.chat-avatar {
+    float: left;
+    width: 51px !important;
+    border-radius: 50%;
+    height: 53px;
+}
+.chat-about {
+  float: left;
+  padding-left: 10px;
+  margin-top: 6px;
+}
+.chat-with {
+  font-weight: bold;
+  font-size: 16px;
+}
+.chat-num-messages {
+  color: #92959e;
+}
+.fa-star {
+  float: right;
+  color: #d8dadf;
+  font-size: 20px;
+  margin-top: 12px;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
 }
