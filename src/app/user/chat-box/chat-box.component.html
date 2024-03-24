@@ -53,7 +53,7 @@
                     <i class="fa fa-star"></i>
                 </div>
 
-                <div class="msg_history" style=" margin-top: 5px; ">
+                <div class="msg_history" id="msg_history" style=" margin-top: 5px; margin-bottom:5px;">
                     <ng-container *ngFor="let chat of chatofcurrentuser;">
                         <ng-container *ngIf="chat.from_!==loggedinuserdata.id; else outgoing">
                             <div class="incoming_msg">
@@ -81,9 +81,11 @@
                 </div>
                 <div class="type_msg">
                     <div class="input_msg_write">
-                        <input type="text" class="write_msg" placeholder="Type a message" />
-                        <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o"
-                                aria-hidden="true"></i></button>
+                        <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="chatmessage"
+                            id="chatmessage" />
+                        <button class="msg_send_btn" type="button" (click)="SendChat()">
+                            <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </div>
             </div>
