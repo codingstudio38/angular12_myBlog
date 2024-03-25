@@ -166,7 +166,7 @@ export class ChatBoxComponent implements OnInit {
     let check: boolean = false;
     // console.log(this.ActiveUsers);
     this.ActiveUsers.forEach((item: any) => {
-      if (item.userid == id) {
+      if (item.id == id) {
         check = true;
       }
     })
@@ -206,6 +206,9 @@ export class ChatBoxComponent implements OnInit {
               };
               $('.chat_people').removeClass('active_chat');
               $(`#chat_people${user.id}`).addClass('active_chat');
+                $(`#chat_date_${user.id}`).html(``);
+                $(`#unsceenp_${user.id}`).html(``);
+                $(`#unsceenspan_${user.id}`).html(``).css('display','none');
           setTimeout(()=>{
               const element = $('#msg_history');
             element.animate({
@@ -276,15 +279,88 @@ onNewMessage(data:any) {
     // console.log(data,this.loggedinuserdata.id);
         if (data.to_ == this.loggedinuserdata.id) {
              const audio = new Audio(`${this.envdata.websiteUrl}assets/sound/Messenger_Notification.mp3`);
-        audio.play();
-          this.chatofcurrentuser.push(data);
-        
+             audio.play();
+if (data.from_ == this.currentChatuser.id) {
+            this.chatofcurrentuser.push(data);
             const element = $('#msg_history');
             element.animate({
                 scrollTop: element.prop("scrollHeight")
             }, 500);
+            this.updatechatreadstatus(data.from_,data.to_,data.id);
+} else {
+  this.getnoofunseenchat(data.from_,data.to_);
+}
+
         }
     }
+
+getnoofunseenchat(from:any,to:any){
+const f = new FormData();
+    f.append('from', from);
+    f.append('to',to);
+    this.APIservice.CallCommonPOSTSrFn(f, '/myblog/access/get-no-of-unseen-chat').subscribe(
+      (response: HttpEvent<any>) => {
+        // console.log(response);
+        switch (response.type) {
+          case HttpEventType.Sent:
+            // console.log('Sent' + HttpEventType.Sent);
+            break;
+          case HttpEventType.ResponseHeader:
+            // console.log('ResponseHeader' + HttpEventType.ResponseHeader);
+            break;
+          case HttpEventType.UploadProgress:
+            // console.log('UploadProgress' + HttpEventType.UploadProgress);
+            break;
+          case HttpEventType.Response:
+            let apistatus: any = response.body;
+            if (apistatus.status == 200) {
+             let date = this.chatservice.currentDateTime(apistatus.data.created_at);
+                $(`#chat_date_${apistatus.data.from_}`).html(`${ date.current_date} ${date.monthName}`);
+                $(`#unsceenp_${apistatus.data.from_}`).html(`${apistatus.data.message}`);
+                $(`#unsceenspan_${apistatus.data.from_}`).html(`${apistatus.total} New`).css('display','block');
+            } else {
+               console.error(apistatus);
+            }
+        }
+      }
+    );
+}
+
+updatechatreadstatus(from:any,to:any,id:any){
+const f = new FormData();
+    f.append('from', from);
+    f.append('to',to);
+    f.append('id',id);
+    this.APIservice.CallCommonPOSTSrFn(f, '/myblog/access/update-chat-read-status').subscribe(
+      (response: HttpEvent<any>) => {
+        // console.log(response);
+        switch (response.type) {
+          case HttpEventType.Sent:
+            // console.log('Sent' + HttpEventType.Sent);
+            break;
+          case HttpEventType.ResponseHeader:
+            // console.log('ResponseHeader' + HttpEventType.ResponseHeader);
+            break;
+          case HttpEventType.UploadProgress:
+            // console.log('UploadProgress' + HttpEventType.UploadProgress);
+            break;
+          case HttpEventType.Response:
+            let apistatus: any = response.body;
+            if (apistatus.status == 200) {
+              console.log(apistatus);
+            } else {
+               console.error(apistatus);
+            }
+        }
+      }
+    );
+}
+
+
+
+
+
+
 
 
 }

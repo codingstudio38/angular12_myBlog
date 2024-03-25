@@ -1,6 +1,6 @@
 <p>{{ wsdata | json }}</p>
 <div class="container">
-    <h3 class=" text-center">Messaging</h3>
+    <h3 class=" text-center">Hello, {{ loggedinuserdata.name }}</h3>
     <div class="messaging">
         <div class="inbox_msg">
             <div class="inbox_people">
@@ -31,9 +31,14 @@
                                     <img src="{{ envdata.filepath }}uploadFiles/{{ user.photo }}" alt="sunil">
                                 </div>
                                 <div class="chat_ib">
-                                    <h5>{{ user.name }}<span class="chat_date">Dec 25</span></h5>
-                                    <!-- <p>Test, which is a new approach to have all solutions
-                                        astrology under one roof.</p> -->
+                                    <h5>{{ user.name }}
+                                        <span class="chat_date" id="chat_date_{{ user.id }}"></span>
+                                    </h5>
+                                    <div>
+                                        <p id="unsceenp_{{ user.id }}"> </p>
+                                        <span id="unsceenspan_{{ user.id }}" style="display: none; width: 60px;"
+                                            class="btn btn-danger btn-sm"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +69,7 @@
                                 <div class="received_msg">
                                     <div class="received_withd_msg">
                                         <p>{{ chat.message }}</p>
-                                        <span class="time_date">{{ chat.created_at }}</span>
+                                        <span class="time_date">{{ chat.created_at | date: 'dd/MM/yyyy h:mm a' }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +78,7 @@
                             <div class="outgoing_msg">
                                 <div class="sent_msg">
                                     <p>{{ chat.message }}</p>
-                                    <span class="time_date">{{ chat.created_at }}</span>
+                                    <span class="time_date">{{ chat.created_at | date: 'dd/MM/yyyy h:mm a' }}</span>
                                 </div>
                             </div>
                         </ng-template>
@@ -92,8 +97,6 @@
         </div>
 
 
-        <p class="text-center top_spac"> Design by <a target="_blank"
-                href="https://www.linkedin.com/in/sunil-rajput-nattho-singh/">Sunil Rajput</a></p>
 
     </div>
 </div>
