@@ -59,7 +59,7 @@ export class ChatBoxComponent implements OnInit {
         //eventname
         this.wsdata = event;
         // console.log(event);
-        if(event.data.datainfo.code=100){
+        if (event.data.datainfo.code = 100) {
           this.onNewMessage(event.data.data)
         }
 
@@ -206,15 +206,15 @@ export class ChatBoxComponent implements OnInit {
               };
               $('.chat_people').removeClass('active_chat');
               $(`#chat_people${user.id}`).addClass('active_chat');
-                $(`#chat_date_${user.id}`).html(``);
-                $(`#unsceenp_${user.id}`).html(``);
-                $(`#unsceenspan_${user.id}`).html(``).css('display','none');
-          setTimeout(()=>{
-              const element = $('#msg_history');
-            element.animate({
-                scrollTop: element.prop("scrollHeight")
-            }, 500);
-          },500)
+              $(`#chat_date_${user.id}`).html(``);
+              $(`#unsceendiv_${user.id}`).html(``);
+
+              setTimeout(() => {
+                const element = $('#msg_history');
+                element.animate({
+                  scrollTop: element.prop("scrollHeight")
+                }, 500);
+              }, 500)
             }
         }
       }
@@ -237,10 +237,10 @@ export class ChatBoxComponent implements OnInit {
 
     const f = new FormData();
     f.append('from', this.loggedinuserdata.id);
-    f.append('to',this.currentChatuser.id);
-    f.append('chat_type','0');//single_chat_group_chat/0=single,1=group	
-    f.append('message',this.chatmessage);
-    f.append('chat_file','');
+    f.append('to', this.currentChatuser.id);
+    f.append('chat_type', '0');//single_chat_group_chat/0=single,1=group	
+    f.append('message', this.chatmessage);
+    f.append('chat_file', '');
     this.APIservice.CallCommonPOSTSrFn(f, '/myblog/access/save-new-message').subscribe(
       (response: HttpEvent<any>) => {
         // console.log(response);
@@ -259,13 +259,13 @@ export class ChatBoxComponent implements OnInit {
             if (apistatus.status == 200) {
               this.chatmessage = '';
               this.chatofcurrentuser.push(apistatus.data);
-            const element = $('#msg_history');
-            element.animate({
+              const element = $('#msg_history');
+              element.animate({
                 scrollTop: element.prop("scrollHeight")
-            }, 500);
+              }, 500);
               // console.log(apistatus);
             } else {
-               console.error(apistatus);
+              console.error(apistatus);
             }
         }
       }
@@ -274,30 +274,30 @@ export class ChatBoxComponent implements OnInit {
   }
 
 
-onNewMessage(data:any) {
-  this.totalchatofcurrentuser=this.totalchatofcurrentuser+1;
+  onNewMessage(data: any) {
+    this.totalchatofcurrentuser = this.totalchatofcurrentuser + 1;
     // console.log(data,this.loggedinuserdata.id);
-        if (data.to_ == this.loggedinuserdata.id) {
-             const audio = new Audio(`${this.envdata.websiteUrl}assets/sound/Messenger_Notification.mp3`);
-             audio.play();
-if (data.from_ == this.currentChatuser.id) {
-            this.chatofcurrentuser.push(data);
-            const element = $('#msg_history');
-            element.animate({
-                scrollTop: element.prop("scrollHeight")
-            }, 500);
-            this.updatechatreadstatus(data.from_,data.to_,data.id);
-} else {
-  this.getnoofunseenchat(data.from_,data.to_);
-}
+    if (data.to_ == this.loggedinuserdata.id) {
+      const audio = new Audio(`${this.envdata.websiteUrl}assets/sound/Messenger_Notification.mp3`);
+      audio.play();
+      if (data.from_ == this.currentChatuser.id) {
+        this.chatofcurrentuser.push(data);
+        const element = $('#msg_history');
+        element.animate({
+          scrollTop: element.prop("scrollHeight")
+        }, 500);
+        this.updatechatreadstatus(data.from_, data.to_, data.id);
+      } else {
+        this.getnoofunseenchat(data.from_, data.to_);
+      }
 
-        }
     }
+  }
 
-getnoofunseenchat(from:any,to:any){
-const f = new FormData();
+  getnoofunseenchat(from: any, to: any) {
+    const f = new FormData();
     f.append('from', from);
-    f.append('to',to);
+    f.append('to', to);
     this.APIservice.CallCommonPOSTSrFn(f, '/myblog/access/get-no-of-unseen-chat').subscribe(
       (response: HttpEvent<any>) => {
         // console.log(response);
@@ -314,23 +314,36 @@ const f = new FormData();
           case HttpEventType.Response:
             let apistatus: any = response.body;
             if (apistatus.status == 200) {
-             let date = this.chatservice.currentDateTime(apistatus.data.created_at);
-                $(`#chat_date_${apistatus.data.from_}`).html(`${ date.current_date} ${date.monthName}`);
-                $(`#unsceenp_${apistatus.data.from_}`).html(`${apistatus.data.message}`);
-                $(`#unsceenspan_${apistatus.data.from_}`).html(`${apistatus.total} New`).css('display','block');
+              let date = this.chatservice.currentDateTime(apistatus.data.created_at);
+              $(`#chat_date_${apistatus.data.from_}`).html(`${date.current_date} ${date.monthName}, ${date.time_convert}`);
+              $(`#unsceendiv_${apistatus.data.from_}`).html(
+                `<p id="unsceenp_${apistatus.data.from_}">${this.textlength(apistatus.data.message,15)} </p>
+                  <span id="unsceenspan_${apistatus.data.from_}" style="width: 60px;"class="btn btn-danger btn-sm">${apistatus.total} New</span>`
+              );
             } else {
-               console.error(apistatus);
+              console.error(apistatus);
             }
         }
       }
     );
+  }
+
+textlength(text:any, l:any){
+  if(text=="" || text== null){
+    return text;
+  } else if(text.length > l){
+return text.substring(0, l)+'...';
+  } else {
+return text;
+  }
 }
 
-updatechatreadstatus(from:any,to:any,id:any){
-const f = new FormData();
+
+  updatechatreadstatus(from: any, to: any, id: any) {
+    const f = new FormData();
     f.append('from', from);
-    f.append('to',to);
-    f.append('id',id);
+    f.append('to', to);
+    f.append('id', id);
     this.APIservice.CallCommonPOSTSrFn(f, '/myblog/access/update-chat-read-status').subscribe(
       (response: HttpEvent<any>) => {
         // console.log(response);
@@ -349,12 +362,12 @@ const f = new FormData();
             if (apistatus.status == 200) {
               console.log(apistatus);
             } else {
-               console.error(apistatus);
+              console.error(apistatus);
             }
         }
       }
     );
-}
+  }
 
 
 
