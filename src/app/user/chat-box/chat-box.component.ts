@@ -92,7 +92,7 @@ export class ChatBoxComponent implements OnInit {
   userlist: any[] = [];
   getChatUserlist() {
     let name = '';
-    this.APIservice.getChatUserlist('').subscribe(
+    this.APIservice.getChatUserlist( `/myblog/access/chat-user-list?name=${name}&current_loggedin_user=${this.loggedinuserdata.id}`).subscribe(
       (response: HttpEvent<any>) => {
         // console.log(response);
         switch (response.type) {
@@ -322,7 +322,7 @@ export class ChatBoxComponent implements OnInit {
               );
             } else {
               console.error(apistatus);
-            }
+            } 
         }
       }
     );
@@ -370,7 +370,21 @@ return text;
   }
 
 
-
+getUnreadchat(user:any):any{
+  if(user.total_unsceen!==null){
+    if(user.total_unsceen > 0){
+      let chat:any = JSON.parse(user.chat_data);
+       let date:any = this.chatservice.currentDateTime(chat.created_at);
+       $(`#chat_date_${chat.from_}`).html(`${date.current_date} ${date.monthName}, ${date.time_convert}`);
+      return `<p id="unsceenp_${chat.from_}">${this.textlength(chat.message,15)} </p>
+              <span id="unsceenspan_${chat.from_}" style="width: 60px;"class="btn btn-danger btn-sm">${user.total_unsceen} New</span>`;
+    } else {
+        return "";
+    }
+  } else{
+    return "";
+  }
+}
 
 
 

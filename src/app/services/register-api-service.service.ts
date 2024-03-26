@@ -341,8 +341,8 @@ export class RegisterApiServiceService {
 
 
   //////////////////////////cht box work start///////////////////////////
-  getChatUserlist(data: any) {
-    return this.http.get(this.apiUrl + '/myblog/access/chat-user-list?name=' + data, {
+  getChatUserlist(apiurl: any) {
+    return this.http.get(this.apiUrl +apiurl, {
       reportProgress: true,
       observe: 'events',
       headers: new HttpHeaders().set('Authorization', `Bearer ${this.loggedinuserdata().token}`)

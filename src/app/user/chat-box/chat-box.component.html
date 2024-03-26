@@ -20,7 +20,8 @@
                 <div class="inbox_chat">
                     <!-- active_chat -->
                     <ng-container *ngFor="let user of userlist; let i=index;">
-                        <div class="chat_list" *ngIf="user.id!==loggedinuserdata.id">
+                        <!-- *ngIf="user.id!==loggedinuserdata.id" -->
+                        <div class="chat_list">
                             <div class="chat_people p-1" id="chat_people{{ user.id }}"
                                 (click)="setcurrentChatandStart(user)">
                                 <div class="chat_img">
@@ -34,7 +35,7 @@
                                     <h5>{{ user.name }}
                                         <span class="chat_date" id="chat_date_{{ user.id }}"></span>
                                     </h5>
-                                    <div id="unsceendiv_{{ user.id }}">
+                                    <div id="unsceendiv_{{ user.id }}" [innerHTML]="getUnreadchat(user)">
                                         <!-- <p id="unsceenp_{{ user.id }}"> </p>
                                         <span id="unsceenspan_{{ user.id }}" style="width: 60px;"
                                             class="btn btn-danger btn-sm"></span> -->
