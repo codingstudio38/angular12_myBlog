@@ -176,13 +176,18 @@ export class ChatBoxComponent implements OnInit {
   currentChatuser: currentChatuserObj = {
     id: '', name: '', email: '', phone: '', photo: ''
   };
+  totalPaginationpage:number=0;
+  page:number=1;
+  limit:number=10;
+  showMorebtn:boolean=false;
   totalchatofcurrentuser: any = '';
   chatofcurrentuser: any[] = [];
   setcurrentChatandStart(user: any) {
+    this.page = 1;
     const f = new FormData();
     f.append('from', this.loggedinuserdata.id);
     f.append('to', user.id);
-    this.APIservice.CallCommonPOSTSrFn(f, '/myblog/access/user-chat-list').subscribe(
+    this.APIservice.CallCommonPOSTSrFn(f, `/myblog/access/user-chat-list?page=${this.page}&limit=${this.limit}`).subscribe(
       (response: HttpEvent<any>) => {
         // console.log(response);
         switch (response.type) {
@@ -199,8 +204,18 @@ export class ChatBoxComponent implements OnInit {
             let apistatus: any = response.body;
             if (apistatus.status == 200) {
               // console.log(apistatus);
-              this.totalchatofcurrentuser = apistatus.total;
-              this.chatofcurrentuser = apistatus.data;
+              this.totalchatofcurrentuser = apistatus.data.total;
+              this.chatofcurrentuser = apistatus.data.data;
+              this.totalPaginationpage=apistatus.data.last_page;
+              //  console.log(this.chatofcurrentuser);
+              this.chatofcurrentuser.sort((a, b) => a.id - b.id);
+              //  console.log(this.chatofcurrentuser);
+              //  console.log(this.chatofcurrentuser);
+              if(apistatus.data.total > 0){
+                this.showMorebtn=true;
+              } else{
+                this.showMorebtn=false;
+              }
               this.currentChatuser = {
                 id: user.id, name: user.name, email: user.email, phone: user.phone, photo: user.photo
               };
@@ -212,7 +227,7 @@ export class ChatBoxComponent implements OnInit {
               setTimeout(() => {
                 const element = $('#msg_history');
                 element.animate({
-                  scrollTop: element.prop("scrollHeight")
+                  scrollTop: element.prop("scrollHeight"),
                 }, 500);
               }, 500)
             }
@@ -223,7 +238,76 @@ export class ChatBoxComponent implements OnInit {
 
   }
 
-
+showmoretext:any='More..';
+showMorebtndisable:boolean=false;  
+loadMoreChat(){
+  this.showMorebtndisable=true;
+ this.godownbtn=true;
+  this.page = this.page+1;
+   const f = new FormData();
+    f.append('from', this.loggedinuserdata.id);
+    f.append('to', this.currentChatuser.id);
+    this.showmoretext=`<i class="fa fa-spinner" aria-hidden="true"></i>`;
+    this.APIservice.CallCommonPOSTSrFn(f, `/myblog/access/user-chat-list?page=${this.page}&limit=${this.limit}`).subscribe(
+      (response: HttpEvent<any>) => {
+        this.showmoretext='More..';
+        this.showMorebtndisable=false;
+        // console.log(response);
+        switch (response.type) {
+          case HttpEventType.Sent:
+            // console.log('Sent' + HttpEventType.Sent);
+            break;
+          case HttpEventType.ResponseHeader:
+            // console.log('ResponseHeader' + HttpEventType.ResponseHeader);
+            break;
+          case HttpEventType.UploadProgress:
+            // console.log('UploadProgress' + HttpEventType.UploadProgress);
+            break;
+          case HttpEventType.Response:
+            let apistatus: any = response.body;
+            if (apistatus.status == 200) {
+              // console.log(apistatus);
+              let datais:any[] = apistatus.data.data;
+              for (let i = 0; i < datais.length; i++) {
+                this.chatofcurrentuser.push(datais[i]);
+              }
+              // console.log(this.chatofcurrentuser);
+              // this.totalchatofcurrentuser = apistatus.data.total;
+              // this.chatofcurrentuser = apistatus.data.data;
+              let items:any[]=this.chatofcurrentuser;
+              //  console.log(this.chatofcurrentuser);
+              items.sort((a, b) => a.id - b.id);
+              this.chatofcurrentuser=[];
+              this.chatofcurrentuser = items;
+   setTimeout(() => {
+                const element = $('#msg_history');
+                element.animate({
+                  top: element.prop("scrollHeight"),
+                }, 500);
+              }, 500)
+              // console.log(this.chatofcurrentuser);
+              if(apistatus.data.total > 0){
+                if(this.page >= this.totalPaginationpage){
+                  this.showMorebtn=false;
+                } else {
+                  this.showMorebtn=true;
+                }
+              } else{
+                this.showMorebtn=false;
+              }
+            }
+        }
+      }
+    );
+}
+godownbtn:boolean=false;
+godown(){
+  this.godownbtn=false;
+const element = $('#msg_history');
+        element.animate({
+          scrollTop: element.prop("scrollHeight")
+        }, 500); 
+}
 
   SendChat(): any {
     if (this.currentChatuser.id == '') {

@@ -187,3 +187,8 @@ display: none;
   clear: both;
   height: 0;
 }
+
+.loadmore-clearfix {
+ position: sticky;
+}
+
