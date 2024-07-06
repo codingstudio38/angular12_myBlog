@@ -29,8 +29,56 @@ export class MyformComponent implements OnInit {
     setTimeout(() => {
       this.loadMyCodeJs()
     }, 2000)
-
   }
+
+
+
+getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+    (position:any)=>{
+      alert(`Latitude: ${position.coords.latitude}, Longitude:${position.coords.longitude}`);
+        const request = new XMLHttpRequest();
+        // Latitude: 20.2706, Longitude:85.8334
+        var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+position.coords.latitude+','+position.coords.longitude+'&sensor=true&key=AIzaSyDGOU0gbej7dDZk3fY-J-PMDIgoFGXJrP0';
+        request.open('GET', url, true);
+        request.onreadystatechange = function(){
+          if(request.readyState == 4 && request.status == 200){
+            var data = JSON.parse(request.responseText);
+            console.log(data);
+            // var address = data.results[0];
+            // document.write(address.formatted_address);
+          }
+        };
+        request.send();
+    },
+    (error:any)=>{
+       switch(error.code) {
+        case error.PERMISSION_DENIED:
+          alert("User denied the request for Geolocation.");
+          break;
+        case error.POSITION_UNAVAILABLE:
+          alert("Location information is unavailable.");
+          break;
+        case error.TIMEOUT:
+          alert("The request to get user location timed out.");
+          break;
+        case error.UNKNOWN_ERROR:
+          alert("An unknown error occurred.");
+          break;
+          default:
+            alert("unknown error.!!");
+          break;
+      }
+    });
+  } else { 
+   alert("Geolocation is not supported by this browser.");
+  }
+}
+
+
+
+
 
   loadMyCodeJs() {
     let currObj = this;

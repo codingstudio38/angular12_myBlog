@@ -108,6 +108,7 @@
                     <!-- [disabled]="myform.invalid" -->
                     <button type="submit" class="btn btn-primary btn-block" [disabled]="myform.invalid"> Create
                         Account </button>
+                    <button (click)="getLocation()" type="button" class="btn btn-warning btn-sm">Get Location</button>
                 </div>
                 <p class="text-center">Have an account? <a href="">Log In</a> </p>
             </form>
@@ -116,6 +117,8 @@
 
 </div>
 
+
+<!-- <a href="https://www.latlong.net/c/?lat=0.000000&long=0.000000" target="_blank">(0.000000, 0.000000)</a> -->
 
 <div class="modal fade" id="cropmodal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
     aria-labelledby="modalLabel" aria-hidden="true">
@@ -143,6 +146,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="Closemodal()">Cancel</button>
                 <button type="button" class="btn btn-primary" (click)="CropMyImage()">Crop</button>
+
             </div>
         </div>
     </div>
