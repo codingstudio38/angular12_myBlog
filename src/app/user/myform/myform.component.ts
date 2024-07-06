@@ -32,6 +32,7 @@ export class MyformComponent implements OnInit {
   }
 
 
+  
 
 getLocation() {
   if (navigator.geolocation) {
